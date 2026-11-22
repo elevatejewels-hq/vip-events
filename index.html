@@ -617,6 +617,217 @@
   }
 </style>
 <!-- VIP PLANNING CHAT STYLE END -->
+<!-- VIP CONCIERGE V2 STYLE START -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ---------- VIP Events Planning Concierge v2 (light mode) ---------- */
+  .vipx-section{padding:64px 0;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 100%)}
+  .vipx-shell{background:#FAF7F2;border:1px solid #EAE3D5;border-radius:26px;overflow:hidden;box-shadow:0 24px 60px rgba(15,23,42,.12);color:#0F172A;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .vipx-shell h3,.vipx-shell h4{font-family:"Playfair Display",Georgia,"Times New Roman",serif}
+  .vipx-card{background:#FFFFFF;border:1px solid #EAE3D5;border-radius:20px;padding:24px 26px;margin:22px 22px 0}
+  .vipx-card:last-child{margin-bottom:22px}
+  /* Hero concierge card */
+  .vipx-hero-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .vipx-mascot{flex:none;width:64px;height:64px;border-radius:50%;background:#0F172A;border:2px solid #F59E0B;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(15,23,42,.25)}
+  .vipx-hero-titles{flex:1;min-width:220px}
+  .vipx-eyebrow{margin:0 0 4px;color:#92400E;font-size:11.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+  .vipx-hero-titles h3{margin:0;font-size:clamp(24px,3.4vw,32px);font-weight:700;color:#0F172A}
+  .vipx-hero-titles p{margin:6px 0 0;color:#475569;font-size:14.5px;line-height:1.55;max-width:68ch}
+  .vipx-pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:6px 12px;font-size:12px;font-weight:800;background:#e9f9ee;color:#166534;border:1px solid #bbe7c6}
+  .vipx-pill .vipx-live-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.2)}
+  .vipx-pill.off{background:#fdf3d7;color:#92400E;border-color:#ecd9a0}
+  .vipx-pill.off .vipx-live-dot{background:#d97706;box-shadow:0 0 0 3px rgba(217,119,6,.18)}
+  .vipx-startover{margin-left:auto;border:1px solid #EAE3D5;background:#F3EFE6;color:#475569;border-radius:999px;padding:8px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+  .vipx-startover:hover{border-color:#F59E0B;color:#92400E}
+  .vipx-resume{display:none;margin-top:16px;background:#FDF9F0;border:1px dashed #D4AF37;border-radius:14px;padding:13px 15px;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;color:#475569}
+  .vipx-resume.show{display:flex}
+  .vipx-resume strong{color:#0F172A}
+  .vipx-btn{border:0;cursor:pointer;font:inherit;font-weight:800;background:#F59E0B;color:#fff;border-radius:999px;padding:11px 20px;font-size:14.5px}
+  .vipx-btn:hover{background:#d97706}
+  .vipx-btn:disabled{opacity:.55;cursor:wait}
+  .vipx-btn.ghost{background:#F3EFE6;color:#0F172A;border:1px solid #EAE3D5}
+  .vipx-btn.ghost:hover{border-color:#F59E0B;color:#92400E}
+  .vipx-btn.small{padding:8px 14px;font-size:13px}
+  .vipx-ask{display:flex;gap:10px;margin-top:18px;align-items:stretch}
+  .vipx-input-wrap{flex:1;display:flex;align-items:flex-end;gap:8px;background:#fff;border:1.5px solid #EAE3D5;border-radius:16px;padding:8px 8px 8px 14px}
+  .vipx-input-wrap:focus-within{border-color:#F59E0B;box-shadow:0 0 0 3px rgba(245,158,11,.18)}
+  .vipx-textarea{flex:1;min-width:0;border:0;resize:vertical;min-height:52px;max-height:150px;font:inherit;font-size:15.5px;color:#0F172A;background:transparent;line-height:1.5}
+  .vipx-textarea:focus{outline:none}
+  .vipx-photo-btn{flex:none;width:42px;height:42px;border-radius:12px;border:1px solid #EAE3D5;background:#F3EFE6;color:#92400E;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .vipx-photo-btn:hover{border-color:#F59E0B}
+  .vipx-photo-chip{display:none;margin-top:10px;align-items:center;gap:10px;background:#FDF9F0;border:1px solid #EAE3D5;border-radius:12px;padding:8px 12px;font-size:13px;color:#475569}
+  .vipx-photo-chip.show{display:flex}
+  .vipx-photo-chip img{width:40px;height:40px;object-fit:cover;border-radius:8px;border:1px solid #EAE3D5}
+  .vipx-photo-remove{margin-left:auto;border:0;background:transparent;color:#92400E;font:inherit;font-weight:800;cursor:pointer;font-size:16px;line-height:1}
+  .vipx-samples{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .vipx-sample{border:1px solid #EAE3D5;background:#FDF9F0;color:#475569;border-radius:999px;padding:8px 13px;font:inherit;font-size:13px;font-weight:600;cursor:pointer;text-align:left}
+  .vipx-sample:hover{border-color:#F59E0B;color:#92400E}
+  .vipx-thread{display:grid;gap:10px;margin-top:18px;max-height:520px;overflow-y:auto}
+  .vipx-thread:empty{margin-top:0}
+  .vipx-msg{max-width:92%;border-radius:16px;padding:12px 15px;font-size:14.5px;line-height:1.55;overflow-wrap:anywhere}
+  .vipx-msg p{margin:0 0 8px}.vipx-msg p:last-child{margin-bottom:0}
+  .vipx-msg ul{margin:5px 0 8px;padding-left:20px}.vipx-msg li{margin:2px 0}
+  .vipx-msg.assistant{background:#fff;color:#0F172A;justify-self:start;border:1px solid #EAE3D5;border-bottom-left-radius:5px}
+  .vipx-msg.user{background:#F59E0B;color:#201a05;justify-self:end;border-bottom-right-radius:5px;font-weight:600}
+  .vipx-msg.waiting{color:#475569;font-style:italic}
+  .vipx-msg a{color:#92400E;font-weight:800}
+  .vipx-table-wrap{overflow-x:auto;margin:10px 0;border:1px solid #EAE3D5;border-radius:12px}
+  .vipx-plan-table{border-collapse:collapse;width:100%;min-width:640px;background:#fff;color:#0F172A;font-size:13px;line-height:1.45}
+  .vipx-plan-table th{background:#0F172A;color:#f5c542;text-align:left;font-weight:800;padding:9px 10px;vertical-align:top}
+  .vipx-plan-table td{padding:8px 10px;border-bottom:1px solid #EAE3D5;vertical-align:top}
+  .vipx-plan-table tr:last-child td{border-bottom:0}
+  .vipx-privacy{margin:14px 2px 0;color:#8494ab;font-size:12.5px;line-height:1.5}
+  /* Quick-pick builder */
+  .vipx-builder-toggle{width:100%;display:flex;align-items:center;gap:10px;background:none;border:0;cursor:pointer;font:inherit;text-align:left;padding:0}
+  .vipx-builder-toggle h4{margin:0;font-size:20px;color:#0F172A}
+  .vipx-builder-toggle span{color:#475569;font-size:13px}
+  .vipx-builder-toggle .vipx-caret{margin-left:auto;color:#92400E;font-weight:800;font-size:18px}
+  .vipx-builder-body{display:none;margin-top:18px}
+  .vipx-builder-body.open{display:block}
+  .vipx-field-label{font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#92400E;margin:18px 0 9px}
+  .vipx-field-label:first-child{margin-top:0}
+  .vipx-swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}
+  .vipx-swatch{display:flex;flex-direction:column;align-items:center;gap:6px;border:1px solid #EAE3D5;background:#fff;color:#0F172A;border-radius:14px;padding:9px 5px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;text-align:center}
+  .vipx-swatch:hover{border-color:#F59E0B}
+  .vipx-swatch .vipx-dot{width:24px;height:24px;border-radius:50%;border:2px solid rgba(15,23,42,.12)}
+  .vipx-swatch.selected{border-color:#F59E0B;background:#FFF4BD;color:#92400E}
+  .vipx-swatch.selected .vipx-dot{box-shadow:0 0 0 2px #fff,0 0 0 4px #F59E0B}
+  .vipx-picked{font-size:13px;color:#475569;margin-top:8px}
+  .vipx-picked strong{color:#0F172A}
+  .vipx-harmony{margin-top:12px;background:#FDF9F0;border:1px dashed #D4AF37;border-radius:12px;padding:11px 14px;font-size:13.5px;color:#475569;line-height:1.55}
+  .vipx-harmony strong{color:#92400E}
+  .vipx-controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 18px}
+  .vipx-control label{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#92400E;margin-bottom:6px}
+  .vipx-control input[type="text"],.vipx-control input[type="number"],.vipx-control input[type="date"],.vipx-control select{width:100%;box-sizing:border-box;font:inherit;font-size:14.5px;color:#0F172A;background:#fff;border:1px solid #EAE3D5;border-radius:10px;padding:9px 11px}
+  .vipx-control input:focus,.vipx-control select:focus{outline:3px solid rgba(245,158,11,.3);border-color:#F59E0B}
+  .vipx-stepper{display:flex;align-items:center;gap:10px}
+  .vipx-step-btn{width:38px;height:38px;border-radius:50%;border:1px solid #EAE3D5;background:#F3EFE6;color:#0F172A;font:inherit;font-size:18px;font-weight:800;cursor:pointer;line-height:1}
+  .vipx-step-btn:hover{border-color:#F59E0B;color:#92400E}
+  .vipx-step-val{font-size:17px;font-weight:800;color:#0F172A;min-width:34px;text-align:center}
+  .vipx-rsvp{border:1px dashed #D4AF37;background:#FDF9F0;color:#92400E;border-radius:999px;padding:8px 12px;font:inherit;font-size:12.5px;font-weight:800;cursor:pointer}
+  .vipx-rsvp:hover{background:#FFF4BD}
+  .vipx-toggle-row{display:flex;align-items:center;gap:10px;font-size:14px;color:#0F172A;font-weight:600}
+  .vipx-toggle-row input{width:19px;height:19px;accent-color:#F59E0B}
+  .vipx-toggle-row small{display:block;color:#475569;font-weight:400;font-size:12.5px}
+  .vipx-buffer-badge{display:inline-block;margin-top:7px;background:#FFF4BD;color:#92400E;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800}
+  .vipx-item-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .vipx-ichip{border:1px solid #EAE3D5;background:#fff;color:#0F172A;border-radius:999px;padding:7px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+  .vipx-ichip.selected{background:#F59E0B;border-color:#F59E0B;color:#fff}
+  .vipx-build-row{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .vipx-build-row span{color:#475569;font-size:13px}
+  /* Sticky metrics bar */
+  .vipx-metrics{position:sticky;top:10px;z-index:30;margin:22px 22px 0;background:#0F172A;color:#fff;border-radius:16px;padding:13px 18px;display:flex;gap:14px 26px;flex-wrap:wrap;align-items:center;box-shadow:0 14px 30px rgba(15,23,42,.28)}
+  .vipx-metric{font-size:13px;color:#c3cadb}
+  .vipx-metric strong{display:block;color:#fff;font-size:15.5px;margin-top:1px}
+  .vipx-metric strong em{color:#f5c542;font-style:normal}
+  .vipx-rebalance{display:none;margin-left:auto;border:0;cursor:pointer;font:inherit;font-weight:800;font-size:13.5px;background:#F59E0B;color:#fff;border-radius:999px;padding:9px 16px}
+  .vipx-rebalance.show{display:inline-block}
+  .vipx-rebalance:hover{background:#d97706}
+  /* Output zones */
+  .vipx-output{display:none}
+  .vipx-output.show{display:block}
+  .vipx-zone-title{margin:0 0 6px;font-size:21px;color:#0F172A}
+  .vipx-zone-sub{margin:0 0 14px;color:#475569;font-size:13.5px;line-height:1.55}
+  .vipx-blueprint-body{color:#33415c;font-size:14.5px;line-height:1.65;white-space:pre-line}
+  .vipx-finish{margin-top:12px;background:#FDF9F0;border:1px solid #EAE3D5;border-radius:12px;padding:11px 14px;font-size:13.5px;color:#475569;line-height:1.55}
+  .vipx-finish strong{color:#92400E}
+  .vipx-geom{margin-top:12px;font-size:13px;color:#475569}
+  .vipx-geom strong{color:#0F172A}
+  .vipx-group-title{margin:20px 2px 10px;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#92400E}
+  .vipx-group-title:first-child{margin-top:4px}
+  .vipx-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media (min-width:900px){.vipx-grid{grid-template-columns:repeat(3,1fr)}}
+  .vipx-pcard{background:#FFFFFF;border:1px solid #EAE3D5;border-radius:14px;padding:13px;display:flex;flex-direction:column;gap:9px;transition:box-shadow .18s ease,transform .18s ease}
+  .vipx-pcard:hover{box-shadow:0 12px 26px rgba(15,23,42,.12);transform:translateY(-2px)}
+  .vipx-pcard-top{display:flex;align-items:center;gap:8px}
+  .vipx-badge{background:#FFF4BD;color:#92400E;border-radius:999px;padding:4px 9px;font-size:11.5px;font-weight:800}
+  .vipx-share-btn{margin-left:auto;flex:none;border:1px solid #EAE3D5;background:#F3EFE6;color:#475569;border-radius:9px;padding:5px 9px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+  .vipx-share-btn:hover{border-color:#F59E0B;color:#92400E}
+  .vipx-pcard-main{display:flex;gap:11px;align-items:center}
+  .vipx-tile{position:relative;flex:none;width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#FDF9F0 0%,#f3ead3 100%);border:1px solid #EAE3D5;display:flex;align-items:center;justify-content:center}
+  .vipx-tile span{font-family:"Playfair Display",Georgia,serif;font-size:27px;font-weight:700;color:#0F172A}
+  .vipx-tile .vipx-tile-dot{position:absolute;right:5px;bottom:5px;width:13px;height:13px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(15,23,42,.3)}
+  .vipx-pcard-name{font-weight:800;color:#0F172A;font-size:14.5px;line-height:1.35}
+  .vipx-pcard-spec{color:#475569;font-size:12.5px;line-height:1.45;margin-top:2px}
+  .vipx-why{margin:0;font-size:12px;color:#92400E;background:#FDF9F0;border-radius:8px;padding:5px 8px;line-height:1.45}
+  .vipx-delivery{margin:0;font-size:12px;color:#166534;font-weight:700;line-height:1.45}
+  .vipx-delivery.warn{color:#b45309}
+  .vipx-pcard-actions{display:flex;align-items:center;gap:8px;margin-top:auto}
+  .vipx-pack-stepper{display:flex;align-items:center;gap:7px}
+  .vipx-pack-stepper button{width:27px;height:27px;border-radius:50%;border:1px solid #EAE3D5;background:#F3EFE6;color:#0F172A;font:inherit;font-weight:800;cursor:pointer;line-height:1}
+  .vipx-pack-stepper button:hover{border-color:#F59E0B;color:#92400E}
+  .vipx-pack-count{font-size:13px;font-weight:800;color:#0F172A;min-width:16px;text-align:center}
+  .vipx-swap-btn{border:1px solid #EAE3D5;background:#fff;color:#475569;border-radius:999px;padding:6px 11px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .vipx-swap-btn:hover{border-color:#F59E0B;color:#92400E}
+  .vipx-buy{display:block;text-align:center;text-decoration:none;background:#F59E0B;color:#fff;font-weight:800;font-size:13.5px;border-radius:10px;padding:9px 10px}
+  .vipx-buy:hover{background:#d97706}
+  .vipx-est{font-size:12px;color:#475569}
+  .vipx-est strong{color:#0F172A}
+  /* Bundle box */
+  .vipx-bundle{background:#FDF9F0;border:1.5px dashed #D4AF37;border-radius:20px;padding:22px 26px;margin:22px 22px 0}
+  .vipx-bundle h4{margin:0 0 6px;font-size:20px;color:#0F172A}
+  .vipx-bundle p{margin:0 0 14px;color:#475569;font-size:13.5px;line-height:1.55}
+  .vipx-bundle-actions{display:flex;gap:9px;flex-wrap:wrap}
+  .vipx-bundle .vipx-note{margin:14px 0 0;font-size:12.5px;color:#8494ab}
+  /* Checklist */
+  .vipx-check-row{display:flex;align-items:flex-start;gap:11px;padding:9px 0;border-bottom:1px solid #EAE3D5;font-size:14px}
+  .vipx-check-row:last-child{border-bottom:0}
+  .vipx-check-row input{width:19px;height:19px;accent-color:#F59E0B;margin-top:1px;flex:none}
+  .vipx-check-row .vipx-check-name{font-weight:700;color:#0F172A}
+  .vipx-check-row .vipx-check-meta{color:#475569;font-size:12.5px}
+  .vipx-check-row.done .vipx-check-name{text-decoration:line-through;color:#8494ab}
+  .vipx-check-row a{color:#92400E;font-weight:700;font-size:12.5px}
+  /* Timeline */
+  .vipx-tl-step{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid #EAE3D5}
+  .vipx-tl-step:last-child{border-bottom:0}
+  .vipx-tl-num{flex:none;width:32px;height:32px;border-radius:50%;background:#F59E0B;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .vipx-tl-step strong{display:block;color:#0F172A;font-size:14.5px}
+  .vipx-tl-step p{margin:2px 0 0;color:#475569;font-size:13.5px;line-height:1.55}
+  /* Upsell band */
+  .vipx-upsell{margin:22px 22px 0;background:#0F172A;border-radius:20px;padding:24px 26px;color:#e6e9f2}
+  .vipx-upsell h4{margin:0 0 8px;color:#f5c542;font-size:21px}
+  .vipx-upsell p{margin:0 0 16px;font-size:14px;line-height:1.6;color:#c3cadb;max-width:70ch}
+  /* Q&A bar */
+  .vipx-qa-row{display:flex;gap:10px}
+  .vipx-qa-input{flex:1;min-width:0;font:inherit;font-size:15px;color:#0F172A;background:#fff;border:1.5px solid #EAE3D5;border-radius:999px;padding:11px 17px}
+  .vipx-qa-input:focus{outline:3px solid rgba(245,158,11,.3);border-color:#F59E0B}
+  .vipx-qa-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  /* Modals */
+  .vipx-modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:200;align-items:center;justify-content:center;padding:18px}
+  .vipx-modal.open{display:flex}
+  .vipx-modal-card{background:#fff;border-radius:20px;max-width:520px;width:100%;max-height:88vh;overflow-y:auto;padding:24px 26px;color:#0F172A;box-shadow:0 30px 70px rgba(15,23,42,.4)}
+  .vipx-modal-card h4{margin:0 0 6px;font-size:21px}
+  .vipx-modal-card p{color:#475569;font-size:13.5px;line-height:1.55;margin:0 0 14px}
+  .vipx-modal-card label{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#92400E;margin:12px 0 5px}
+  .vipx-modal-card input[type="text"],.vipx-modal-card input[type="tel"],.vipx-modal-card textarea{width:100%;box-sizing:border-box;font:inherit;font-size:14.5px;color:#0F172A;border:1px solid #EAE3D5;border-radius:10px;padding:9px 11px}
+  .vipx-modal-card textarea{min-height:120px;resize:vertical;line-height:1.5}
+  .vipx-modal-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+  .vipx-swap-presets{display:grid;gap:8px}
+  .vipx-swap-preset{border:1px solid #EAE3D5;background:#FDF9F0;color:#0F172A;border-radius:12px;padding:11px 14px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;text-align:left}
+  .vipx-swap-preset:hover,.vipx-swap-preset.selected{border-color:#F59E0B;background:#FFF4BD}
+  /* Toast */
+  .vipx-toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:#0F172A;color:#fff;font-size:14px;font-weight:700;border-radius:999px;padding:11px 20px;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;z-index:300;box-shadow:0 16px 34px rgba(15,23,42,.35)}
+  .vipx-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .vipx-toast.ok{background:#166534}
+  .vipx-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  @media (max-width:760px){
+    .vipx-card,.vipx-bundle{margin-left:12px;margin-right:12px;padding:19px 17px}
+    .vipx-metrics,.vipx-upsell{margin-left:12px;margin-right:12px}
+    .vipx-upsell{padding:20px 18px}
+    .vipx-ask{flex-direction:column}
+    .vipx-ask .vipx-btn{align-self:flex-end}
+    .vipx-msg{max-width:97%}
+    .vipx-startover{margin-left:0}
+  }
+  @media print{
+    body.vipx-printing *{visibility:hidden}
+    body.vipx-printing #vipx-checklist,body.vipx-printing #vipx-checklist *{visibility:visible}
+    body.vipx-printing #vipx-checklist{position:absolute;top:0;left:0;width:100%;margin:0;box-shadow:none}
+    body.vipx-printing #vipx-print-btn{display:none}
+  }
+</style>
+<!-- VIP CONCIERGE V2 STYLE END -->
 </head>
 <body>
 
@@ -1122,6 +1333,250 @@
     </div>
   </section>
 <!-- VIP PLANNING CHAT ADDITION END -->
+<!-- VIP CONCIERGE V2 SECTION START -->
+  <section class="vipx-section" id="vipx-planner" aria-labelledby="vipx-title">
+    <div class="wrap">
+      <div class="vipx-shell">
+        <!-- Hero concierge card -->
+        <div class="vipx-card" id="vipx-hero">
+          <div class="vipx-hero-head">
+            <div class="vipx-mascot" aria-hidden="true">
+              <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#f5c542" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5v3"/><circle cx="12" cy="2.2" r="1.1" fill="#7dd3fc" stroke="none"/><rect x="4.5" y="6" width="15" height="11.5" rx="3.5"/><circle cx="9.2" cy="11" r="1.15" fill="#7dd3fc" stroke="none"/><circle cx="14.8" cy="11" r="1.15" fill="#7dd3fc" stroke="none"/><path d="M9.4 14.6c.8.7 1.6 1 2.6 1s1.8-.3 2.6-1"/><path d="M2.8 10.5v3M21.2 10.5v3"/><path d="M8.5 20.5h7"/></svg>
+            </div>
+            <div class="vipx-hero-titles">
+              <p class="vipx-eyebrow">Free planning concierge</p>
+              <h3 id="vipx-title">Plan Your Whole Event in One Message</h3>
+              <p>Tell me everything at once - colours, guests, budget, the day, what you need - or tap the quick picks below. You can even attach a photo of your room and I will plan around it. Shopping items are bought directly by you from the retailer; they are <strong>not included</strong> in any VIP Events service price.</p>
+            </div>
+            <span class="vipx-pill" id="vipx-live-pill"><span class="vipx-live-dot"></span><span id="vipx-live-text">Live</span></span>
+            <button class="vipx-startover" type="button" id="vipx-startover">Start over</button>
+          </div>
+          <div class="vipx-resume" id="vipx-resume">
+            <span><strong>Welcome back.</strong> Your event from last time is saved on this device.</span>
+            <button class="vipx-btn small" type="button" id="vipx-resume-btn">Resume my event</button>
+            <button class="vipx-btn small ghost" type="button" id="vipx-fresh-btn">Start fresh</button>
+          </div>
+          <div class="vipx-thread" id="vipx-thread" aria-live="polite" aria-label="Planning concierge messages"></div>
+          <div class="vipx-ask">
+            <div class="vipx-input-wrap">
+              <label class="vipx-sr-only" for="vipx-input">Describe your event</label>
+              <textarea class="vipx-textarea" id="vipx-input" rows="2" placeholder="e.g. I'm hosting a Chanuka party for 65 people next Tuesday in a small hall, budget is $600, love navy and gold, need disposable plates and lights..."></textarea>
+              <button class="vipx-photo-btn" type="button" id="vipx-photo-btn" aria-label="Attach a venue or inspiration photo" title="Attach a venue or inspiration photo">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              </button>
+              <input type="file" id="vipx-photo-input" accept="image/*" class="vipx-sr-only" aria-label="Choose a photo to attach" />
+            </div>
+            <button class="vipx-btn" type="button" id="vipx-send">Send</button>
+          </div>
+          <div class="vipx-photo-chip" id="vipx-photo-chip">
+            <img id="vipx-photo-thumb" alt="Your attached venue photo" />
+            <span id="vipx-photo-name">Photo attached</span>
+            <button class="vipx-photo-remove" type="button" id="vipx-photo-remove" aria-label="Remove the attached photo">&times;</button>
+          </div>
+          <div class="vipx-samples" id="vipx-samples" aria-label="Sample event descriptions">
+            <button class="vipx-sample" type="button" data-sample="I'm hosting a Chanuka party for 65 people in a small hall, budget is $600, I love navy and gold, and I need disposable plates, napkins, tablecloths and lights. Everything must arrive by next Tuesday.">Chanuka party - navy &amp; gold, 65 guests</button>
+            <button class="vipx-sample" type="button" data-sample="I'm planning a blush pink and ivory baby shower at home for 25 guests, budget around $250, buffet style, and I need plates, cups, napkins, faux flowers and centrepieces.">Blush baby shower - 25 guests</button>
+            <button class="vipx-sample" type="button" data-sample="Royal blue and silver bar mitzvah dinner for 120 guests, plated three-course meal, budget $1,800, 60-inch round tables, full table setup including chargers, glassware and candles.">Royal blue mitzvah - 120 guests</button>
+          </div>
+          <p class="vipx-privacy">Your messages and any photo are sent to the planning assistant only to create your plan. Please do not enter passwords, payment details, or other private information.</p>
+        </div>
+
+        <!-- Collapsible visual quick-pick builder -->
+        <div class="vipx-card" id="vipx-builder-card">
+          <button class="vipx-builder-toggle" type="button" id="vipx-builder-toggle" aria-expanded="false" aria-controls="vipx-builder-body">
+            <h4>Visual Quick-Pick Builder</h4>
+            <span>Tap your way to a plan instead of typing</span>
+            <span class="vipx-caret" id="vipx-builder-caret">+</span>
+          </button>
+          <div class="vipx-builder-body" id="vipx-builder-body">
+            <p class="vipx-field-label">Event colours</p>
+            <div class="vipx-swatch-grid" id="vipx-swatches"></div>
+            <div class="vipx-picked" id="vipx-picked">No colours picked yet - tap the chart or describe them in your message.</div>
+            <div class="vipx-harmony" id="vipx-harmony"><strong>Colour harmony tip:</strong> pick one hero colour and one metallic finish (matte gold, brushed champagne, or mirror gold). Mixing metallic finishes can clash - ivory or cream in between keeps the table calm and elegant.</div>
+            <p class="vipx-field-label">Items to plan</p>
+            <div class="vipx-item-chips" id="vipx-items"></div>
+            <p class="vipx-field-label">The details</p>
+            <div class="vipx-controls">
+              <div class="vipx-control">
+                <label>Guests</label>
+                <div class="vipx-stepper">
+                  <button class="vipx-step-btn" type="button" id="vipx-guests-minus" aria-label="Fewer guests">-</button>
+                  <span class="vipx-step-val" id="vipx-guests-val">-</span>
+                  <button class="vipx-step-btn" type="button" id="vipx-guests-plus" aria-label="More guests">+</button>
+                  <button class="vipx-rsvp" type="button" id="vipx-rsvp15">+15 RSVP'd</button>
+                </div>
+              </div>
+              <div class="vipx-control">
+                <label for="vipx-budget">Budget (total, $)</label>
+                <input type="number" id="vipx-budget" min="0" step="10" placeholder="e.g. 600" />
+              </div>
+              <div class="vipx-control">
+                <label for="vipx-table">Table shape</label>
+                <select id="vipx-table">
+                  <option value="">Not sure yet</option>
+                  <option value="6-foot rectangular banquet tables">6 ft rectangular banquet</option>
+                  <option value="8-foot banquet tables">8 ft banquet</option>
+                  <option value="60-inch round tables">60 in round</option>
+                </select>
+              </div>
+              <div class="vipx-control">
+                <label for="vipx-menu">Menu style</label>
+                <select id="vipx-menu">
+                  <option value="">Not sure yet</option>
+                  <option value="Buffet">Buffet</option>
+                  <option value="Plated three-course dinner">Plated three-course dinner</option>
+                  <option value="Cocktail and dessert only">Cocktail &amp; dessert only</option>
+                </select>
+              </div>
+              <div class="vipx-control">
+                <label for="vipx-stores">Preferred stores</label>
+                <select id="vipx-stores">
+                  <option value="">No preference</option>
+                  <option value="Amazon">Amazon</option>
+                  <option value="Walmart">Walmart</option>
+                  <option value="Target">Target</option>
+                  <option value="WebstaurantStore">WebstaurantStore</option>
+                  <option value="Amazon and Walmart">Amazon + Walmart</option>
+                </select>
+              </div>
+              <div class="vipx-control">
+                <label for="vipx-date">Products must arrive by</label>
+                <input type="date" id="vipx-date" />
+                <span class="vipx-buffer-badge" id="vipx-buffer-badge" style="display:none"></span>
+              </div>
+              <div class="vipx-control">
+                <label>Venue flame rules</label>
+                <div class="vipx-toggle-row">
+                  <input type="checkbox" id="vipx-led" />
+                  <span>Flameless LED only<small>Choose this if your hall bans open flame - or if you are not sure.</small></span>
+                </div>
+              </div>
+            </div>
+            <div class="vipx-build-row">
+              <button class="vipx-btn" type="button" id="vipx-build-btn">Build my plan</button>
+              <span>Uses everything above plus anything you typed - you can still change your mind after.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sticky metrics bar -->
+        <div class="vipx-metrics" id="vipx-metrics" aria-label="Plan metrics">
+          <div class="vipx-metric">Guests<strong id="vipx-m-guests">Add guests</strong></div>
+          <div class="vipx-metric">Tables &amp; cloths<strong id="vipx-m-tables">Add a table shape</strong></div>
+          <div class="vipx-metric">Estimated cart<strong id="vipx-m-cart">No plan yet</strong></div>
+          <button class="vipx-rebalance" type="button" id="vipx-rebalance">Rebalance cart</button>
+        </div>
+
+        <!-- Output zones -->
+        <div class="vipx-output" id="vipx-output">
+          <div class="vipx-card" id="vipx-blueprint-card">
+            <h4 class="vipx-zone-title">Your Table Setup Blueprint</h4>
+            <p class="vipx-zone-sub">Exactly how to assemble the look once everything arrives.</p>
+            <div class="vipx-blueprint-body" id="vipx-blueprint-body"></div>
+            <div class="vipx-finish" id="vipx-finish" style="display:none"></div>
+            <p class="vipx-geom" id="vipx-geom"></p>
+          </div>
+
+          <div class="vipx-card" id="vipx-cards-card">
+            <h4 class="vipx-zone-title">Your Itemised Shopping Plan</h4>
+            <p class="vipx-zone-sub">Pack math is done for you, with a small buffer for breakage and extra guests. Prices, where shown, are the plan's rough estimates - always check the live product page before buying.</p>
+            <div id="vipx-cards"></div>
+          </div>
+
+          <div class="vipx-bundle" id="vipx-bundle">
+            <h4>Shareable Master Bundle</h4>
+            <p>Every item, its pack count, and a shopping search link for each - ready to send to a spouse, co-host, or helper.</p>
+            <div class="vipx-bundle-actions">
+              <button class="vipx-btn" type="button" id="vipx-copy-all">Copy all items &amp; links</button>
+              <a class="vipx-btn ghost" id="vipx-wa" href="#" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">Share on WhatsApp</a>
+              <a class="vipx-btn ghost" id="vipx-sms" href="#" style="text-decoration:none;display:inline-block">Share by text</a>
+            </div>
+            <p class="vipx-note">Items are purchased directly from the retailer at their standard price — not included in VIP Events service packages.</p>
+          </div>
+
+          <div class="vipx-card" id="vipx-checklist">
+            <h4 class="vipx-zone-title">Master Shopping Checklist</h4>
+            <p class="vipx-zone-sub">Tick items off as you buy them - your ticks are saved on this device.</p>
+            <div id="vipx-checklist-list"></div>
+            <div class="vipx-bundle-actions" style="margin-top:14px">
+              <button class="vipx-btn ghost small" type="button" id="vipx-print-btn">Print checklist</button>
+            </div>
+          </div>
+
+          <div class="vipx-card" id="vipx-timeline-card">
+            <h4 class="vipx-zone-title">Host Prep &amp; Setup Countdown</h4>
+            <p class="vipx-zone-sub">A calm countdown from arrival day to party time.</p>
+            <div id="vipx-timeline-list"></div>
+          </div>
+
+          <div class="vipx-upsell" id="vipx-upsell">
+            <h4>Make It Glow - VIP Events Lighting &amp; Sound</h4>
+            <p id="vipx-upsell-text">Your plan covers the table. Our team covers the room: warm-amber wireless uplights, narrow-beam pinspots for your centrepieces, and clean, elegant sound - matched to your colours and guest count.</p>
+            <button class="vipx-btn" type="button" id="vipx-send-plan-btn">Send Plan to VIP Events</button>
+          </div>
+        </div>
+
+        <!-- Follow-up Q&A bar -->
+        <div class="vipx-card" id="vipx-qa-card">
+          <h4 class="vipx-zone-title">Questions About Your Plan?</h4>
+          <p class="vipx-zone-sub">Ask anything - quantities, sizes, swaps, timing. The concierge remembers your plan.</p>
+          <div class="vipx-qa-row">
+            <label class="vipx-sr-only" for="vipx-qa-input">Ask a follow-up question</label>
+            <input class="vipx-qa-input" id="vipx-qa-input" type="text" autocomplete="off" placeholder="e.g. How many bags of ice do I need?" />
+            <button class="vipx-btn" type="button" id="vipx-qa-send">Ask</button>
+          </div>
+          <div class="vipx-qa-chips" id="vipx-qa-chips">
+            <button class="vipx-sample" type="button" data-ask="How many bags of ice do I need for my guest count?">How much ice do I need?</button>
+            <button class="vipx-sample" type="button" data-ask="Will 108-inch tablecloths touch the floor on a standard 6 ft table?">Will 108-inch cloths touch the floor?</button>
+            <button class="vipx-sample" type="button" data-ask="15 more people just RSVP'd - please recalculate my whole plan, keeping my colours and stores the same.">15 more guests RSVP'd</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Swap modal -->
+    <div class="vipx-modal" id="vipx-swap-modal" role="dialog" aria-modal="true" aria-labelledby="vipx-swap-title">
+      <div class="vipx-modal-card">
+        <h4 id="vipx-swap-title">Swap this item</h4>
+        <p id="vipx-swap-sub">Pick an alternative direction, or describe your own - the concierge updates just this item and returns the full plan.</p>
+        <div class="vipx-swap-presets" id="vipx-swap-presets">
+          <button class="vipx-swap-preset" type="button" data-swap="Show me a cheaper version of this item.">A cheaper version</button>
+          <button class="vipx-swap-preset" type="button" data-swap="Show me a more premium, elegant version of this item.">A more premium version</button>
+          <button class="vipx-swap-preset" type="button" data-swap="Show me a different, more modern style of this item.">A different, more modern style</button>
+          <button class="vipx-swap-preset" type="button" data-swap="Show me a flameless, fire-safe version of this item.">A flameless / fire-safe version</button>
+        </div>
+        <label for="vipx-swap-custom">Or describe your own swap</label>
+        <input type="text" id="vipx-swap-custom" placeholder="e.g. Something in silver instead of gold" />
+        <div class="vipx-modal-actions">
+          <button class="vipx-btn" type="button" id="vipx-swap-go">Ask for this swap</button>
+          <button class="vipx-btn ghost" type="button" id="vipx-swap-close">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Send-plan-to-team modal -->
+    <div class="vipx-modal" id="vipx-team-modal" role="dialog" aria-modal="true" aria-labelledby="vipx-team-title">
+      <div class="vipx-modal-card">
+        <h4 id="vipx-team-title">Send This Plan to VIP Events</h4>
+        <p>Your details plus the plan summary below are packaged into a text message to the VIP Events team at <strong>201-649-3696</strong> - it opens in your own messages app, ready to send.</p>
+        <label for="vipx-team-name">Your name</label>
+        <input type="text" id="vipx-team-name" autocomplete="name" placeholder="Your name" />
+        <label for="vipx-team-phone">Your phone</label>
+        <input type="tel" id="vipx-team-phone" autocomplete="tel" placeholder="Your phone number" />
+        <label for="vipx-team-city">City / neighbourhood</label>
+        <input type="text" id="vipx-team-city" placeholder="e.g. Monsey" />
+        <label for="vipx-team-summary">Plan summary (attached)</label>
+        <textarea id="vipx-team-summary" readonly></textarea>
+        <div class="vipx-modal-actions">
+          <a class="vipx-btn" id="vipx-team-send" href="sms:+12016493696" style="text-decoration:none;display:inline-block">Text it to VIP Events</a>
+          <button class="vipx-btn ghost" type="button" id="vipx-team-close">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="vipx-toast" id="vipx-toast" role="status" aria-live="polite"></div>
+  </section>
+<!-- VIP CONCIERGE V2 SECTION END -->
 
   <!-- ============ CONTACT ============ -->
   <section id="contact" style="padding-top:26px">
@@ -2439,5 +2894,1204 @@ var ZIP3_STATE="005NY010MA011MA012MA013MA014MA015MA016MA017MA018MA019MA020MA021M
 })();
 </script>
 <!-- VIP PLANNING CHAT SCRIPT END -->
+<!-- VIP CONCIERGE V2 SCRIPT START -->
+<script>
+(function () {
+  "use strict";
+
+  var VIPX_CHAT = "https://vip-events-chat-backend.onrender.com";
+
+  var endpoint = VIPX_CHAT.replace(/\/+$/, "");
+  var PHONE_DISPLAY = "201-649-3696";
+  var TEAM_NUMBER = "+12016493696";
+  var STORE_KEY = "vipx-session-v1";
+  var DIRECT_NOTE = "Items are purchased directly from the retailer at their standard price — not included in VIP Events service packages.";
+  var ZONE_ORDER = ["Main Guest Dining Tables", "Centerpieces & Fire-Safe Lighting", "Buffet & Dessert Station"];
+
+  function el(id) { return document.getElementById(id); }
+
+  var section = el("vipx-planner");
+  if (!section) return;
+
+  /* --- Supersede the v1 guided chat: hide its section and rebind the
+         FREE PLANNING box button to this planner. The v1 blocks stay in
+         the file untouched (stripping the v2 blocks returns the v1
+         publish file byte-for-byte); this script runs after the v1
+         script, so cloning the button drops its v1 click handler. --- */
+  var oldSection = el("planning-chat");
+  if (oldSection) oldSection.style.display = "none";
+  var fpBtn = el("vipc-fp-open");
+  function bindFp(btn) {
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      if (typeof section.scrollIntoView === "function") section.scrollIntoView({ behavior: "smooth", block: "start" });
+      var input = el("vipx-input");
+      if (input) setTimeout(function () { input.focus(); }, 350);
+    });
+  }
+  if (fpBtn && fpBtn.parentNode && typeof fpBtn.cloneNode === "function") {
+    try {
+      var fpClone = fpBtn.cloneNode(true);
+      fpBtn.parentNode.replaceChild(fpClone, fpBtn);
+      bindFp(fpClone);
+    } catch (e) { bindFp(fpBtn); }
+  } else {
+    bindFp(fpBtn);
+  }
+
+  var threadEl = el("vipx-thread");
+  var inputEl = el("vipx-input");
+  var sendBtn = el("vipx-send");
+  var pillEl = el("vipx-live-pill");
+  var liveTextEl = el("vipx-live-text");
+  var resumeEl = el("vipx-resume");
+  var photoBtn = el("vipx-photo-btn");
+  var photoInput = el("vipx-photo-input");
+  var photoChip = el("vipx-photo-chip");
+  var photoThumb = el("vipx-photo-thumb");
+  var photoName = el("vipx-photo-name");
+  var outputEl = el("vipx-output");
+  var cardsEl = el("vipx-cards");
+  var toastEl = el("vipx-toast");
+
+  var COLOUR_CHART = [
+    { name: "Gold", hex: "#d9a514" }, { name: "Champagne", hex: "#e3c878" },
+    { name: "Ivory", hex: "#f3ead3" }, { name: "White", hex: "#ffffff" },
+    { name: "Navy", hex: "#1c2f63" }, { name: "Royal blue", hex: "#2447a8" },
+    { name: "Light blue", hex: "#9cc4e4" }, { name: "Blush pink", hex: "#e8a7b8" },
+    { name: "Burgundy", hex: "#7b1e35" }, { name: "Red", hex: "#b3232a" },
+    { name: "Sage green", hex: "#a8b79a" }, { name: "Mint", hex: "#bfe3cf" },
+    { name: "Lavender", hex: "#c3b2e0" }, { name: "Purple", hex: "#6c3fd4" },
+    { name: "Silver", hex: "#c0c6d4" }, { name: "Black", hex: "#161616" },
+    { name: "Brown", hex: "#7a4a2b" }
+  ];
+  var ITEM_OPTIONS = [
+    "Candle holders", "Candles", "Napkins", "Plates",
+    "Paper goods (chargers & rounds)", "Cups", "Cutlery", "Table covers",
+    "Faux flowers", "Centrepieces"
+  ];
+
+  /* ---------------- State ---------------- */
+  function freshState() {
+    return {
+      facts: { colors: [], guests: null, budget: "", items: [], stores: "", arrivalDate: "", tableShape: "", menuStyle: "", ledOnly: false },
+      history: [],
+      plan: null,
+      packs: {},
+      checked: {},
+      swapIdx: -1,
+      swapChoice: ""
+    };
+  }
+  var S = freshState();
+  var busy = false;
+  var pendingImage = null; // { dataUrl }
+
+  function saveSession() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify({
+        facts: S.facts, history: S.history.slice(-40), plan: S.plan, packs: S.packs, checked: S.checked
+      }));
+    } catch (e) { /* private mode / quota - the chat still works */ }
+  }
+  function loadSession() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (!raw) return null;
+      var data = JSON.parse(raw);
+      if (!data || typeof data !== "object") return null;
+      var st = freshState();
+      if (data.facts && typeof data.facts === "object") {
+        for (var k in st.facts) { if (data.facts[k] !== undefined) st.facts[k] = data.facts[k]; }
+      }
+      if (Array.isArray(data.history)) st.history = data.history;
+      if (data.plan && Array.isArray(data.plan.items)) st.plan = data.plan;
+      if (data.packs && typeof data.packs === "object") st.packs = data.packs;
+      if (data.checked && typeof data.checked === "object") st.checked = data.checked;
+      return (st.history.length || st.plan) ? st : null;
+    } catch (e) { return null; }
+  }
+  function clearSession() { try { localStorage.removeItem(STORE_KEY); } catch (e) { /* noop */ } }
+
+  /* ---------------- Small helpers ---------------- */
+  function escapeHtml(text) {
+    return String(text || "")
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+  function inlineHtml(text) {
+    var out = escapeHtml(text);
+    out = out.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    out = out.replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<em>$2</em>");
+    return out;
+  }
+  function isTableRow(line) { return /^\s*\|.*\|\s*$/.test(line); }
+  function splitTableRow(line) {
+    var t = String(line).trim();
+    if (t.charAt(0) === "|") t = t.slice(1);
+    if (t.charAt(t.length - 1) === "|") t = t.slice(0, -1);
+    return t.split("|").map(function (c) { return c.trim(); });
+  }
+  function isSeparatorRow(line) {
+    if (!isTableRow(line)) return false;
+    return splitTableRow(line).every(function (c) { return /^:?-{3,}:?$/.test(c); });
+  }
+  function renderRich(container, text) {
+    var lines = String(text || "").split(/\r?\n/);
+    var i = 0;
+    while (i < lines.length) {
+      if (isTableRow(lines[i]) && i + 1 < lines.length && isSeparatorRow(lines[i + 1])) {
+        var headers = splitTableRow(lines[i]);
+        i += 2;
+        var rows = [];
+        while (i < lines.length && isTableRow(lines[i])) { rows.push(splitTableRow(lines[i])); i++; }
+        var wrap = document.createElement("div");
+        wrap.className = "vipx-table-wrap";
+        var table = document.createElement("table");
+        table.className = "vipx-plan-table";
+        table.setAttribute("aria-label", "Your itemised event plan");
+        var thead = document.createElement("thead");
+        var headRow = document.createElement("tr");
+        headers.forEach(function (cell) {
+          var th = document.createElement("th");
+          th.scope = "col";
+          th.innerHTML = inlineHtml(cell);
+          headRow.appendChild(th);
+        });
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+        var tbody = document.createElement("tbody");
+        rows.forEach(function (row) {
+          var tr = document.createElement("tr");
+          headers.forEach(function (_, idx) {
+            var td = document.createElement("td");
+            td.innerHTML = inlineHtml(row[idx] || "");
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        wrap.appendChild(table);
+        container.appendChild(wrap);
+        continue;
+      }
+      if (!lines[i].trim()) { i++; continue; }
+      if (/^\s*[-*]\s+/.test(lines[i])) {
+        var ul = document.createElement("ul");
+        while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) {
+          var li = document.createElement("li");
+          li.innerHTML = inlineHtml(lines[i].replace(/^\s*[-*]\s+/, ""));
+          ul.appendChild(li);
+          i++;
+        }
+        container.appendChild(ul);
+        continue;
+      }
+      var para = [];
+      while (i < lines.length && lines[i].trim() && !isTableRow(lines[i]) && !/^\s*[-*]\s+/.test(lines[i])) {
+        para.push(lines[i].trim());
+        i++;
+      }
+      var p = document.createElement("p");
+      p.innerHTML = inlineHtml(para.join(" "));
+      container.appendChild(p);
+    }
+  }
+  var toastTimer = null;
+  function showToast(msg, ok) {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.className = "vipx-toast show" + (ok ? " ok" : "");
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.className = "vipx-toast"; }, 2400);
+  }
+  function copyText(text, okMsg) {
+    function done() { showToast(okMsg || "Copied!", true); }
+    function fallback() {
+      try {
+        if (typeof document.execCommand !== "function") throw new Error("no execCommand");
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        done();
+      } catch (e) { showToast("Copy didn't work here - try the WhatsApp or text share buttons."); }
+    }
+    if (typeof navigator !== "undefined" && navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else { fallback(); }
+  }
+
+  /* ---------------- Dates ---------------- */
+  function todayStart() { var d = new Date(); d.setHours(0, 0, 0, 0); return d; }
+  function parseDate(value) {
+    var m = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (!m) return null;
+    return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+  }
+  function addDays(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x; }
+  function fmtDate(d) { return d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }); }
+  function fmtDateLong(d) { return d.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" }); }
+  function eventDate() { return parseDate(S.facts.arrivalDate) || (S.plan ? parseDate(S.plan.eventDate) : null); }
+  function orderByInfo() {
+    var d = eventDate();
+    if (!d) return { text: "Add your event date for order-by guidance.", warn: false };
+    var days = Math.round((d - todayStart()) / 86400000);
+    if (days < 0) return { text: "That date has passed - check the date in your plan.", warn: true };
+    if (days <= 2) return { text: "Tight timeline - order today and choose the fastest option at checkout.", warn: true };
+    return { text: "Order-by guidance: order by " + fmtDate(addDays(d, -3)) + " to keep a safe buffer.", warn: false };
+  }
+
+  /* ---------------- Retailer search links ---------------- */
+  function searchUrl(retailer, terms) {
+    var q = encodeURIComponent(String(terms || "").trim());
+    var r = String(retailer || "").toLowerCase();
+    if (r.indexOf("amazon") >= 0) return "https://www.amazon.com/s?k=" + q;
+    if (r.indexOf("walmart") >= 0) return "https://www.walmart.com/search?q=" + q;
+    if (r.indexOf("target") >= 0) return "https://www.target.com/s?searchTerm=" + q;
+    if (r.indexOf("webstaurant") >= 0) return "https://www.webstaurantstore.com/search/" + q + ".html";
+    return "https://www.google.com/search?q=" + encodeURIComponent((retailer ? retailer + " " : "") + String(terms || ""));
+  }
+  function retailerLabel(retailer) {
+    var r = String(retailer || "").toLowerCase();
+    if (r.indexOf("amazon") >= 0) return "Search on Amazon";
+    if (r.indexOf("walmart") >= 0) return "Search on Walmart";
+    if (r.indexOf("target") >= 0) return "Search on Target";
+    if (r.indexOf("webstaurant") >= 0) return "Search on WebstaurantStore";
+    return retailer ? "Search " + retailer : "Search the web";
+  }
+
+  /* ---------------- Facts -> server ---------------- */
+  function guided() {
+    var f = S.facts, g = {};
+    if (f.colors && f.colors.length) g.colors = f.colors.join(", ");
+    if (f.guests) g.guestCount = f.guests;
+    if (f.budget) g.budget = f.budget;
+    if (f.items && f.items.length) g.items = f.items.slice();
+    if (f.stores) g.stores = f.stores;
+    if (f.arrivalDate) g.arrivalDate = f.arrivalDate;
+    if (f.menuStyle) g.menu = f.menuStyle;
+    if (f.tableShape) g.tableShape = f.tableShape;
+    if (f.ledOnly) g.venueNotes = "Venue may restrict open flame - prefer flameless LED options";
+    return g;
+  }
+
+  /* ---------------- Metrics ---------------- */
+  function seatsPer() {
+    var t = String(S.facts.tableShape || "");
+    if (t.indexOf("60") >= 0 || /round/i.test(t)) return 8;
+    if (t.indexOf("8-foot") >= 0 || t.indexOf("8 ft") >= 0) return 10;
+    if (t.indexOf("6") >= 0) return 8;
+    return 10;
+  }
+  function tablesCount() {
+    if (!S.facts.guests) return null;
+    return Math.max(1, Math.ceil(S.facts.guests / seatsPer()));
+  }
+  function clothText() {
+    var t = String(S.facts.tableShape || "");
+    if (t.indexOf("60") >= 0 || /round/i.test(t)) return "120 in round cloths (floor-length)";
+    if (t.indexOf("8") >= 0) return "90 x 156 in cloths (floor-length)";
+    if (t.indexOf("6") >= 0) return "90 x 132 in cloths (floor-length)";
+    return "cloth size once tables are picked";
+  }
+  function estimateValue(est) {
+    if (!est) return null;
+    var nums = String(est).match(/\d+(?:\.\d+)?/g);
+    if (!nums || !nums.length) return null;
+    if (nums.length >= 2) return (parseFloat(nums[0]) + parseFloat(nums[1])) / 2;
+    return parseFloat(nums[0]);
+  }
+  function currentPacks(idx, item) {
+    if (S.packs[idx] !== undefined && S.packs[idx] !== null) return S.packs[idx];
+    var p = parseInt(item && item.packs, 10);
+    return isNaN(p) || p < 1 ? 1 : p;
+  }
+  function estimatedCart() {
+    if (!S.plan || !Array.isArray(S.plan.items)) return null;
+    var total = 0, priced = 0;
+    S.plan.items.forEach(function (item, idx) {
+      var v = estimateValue(item.estimate);
+      if (v !== null) { total += v * currentPacks(idx, item); priced++; }
+    });
+    return { total: total, priced: priced, count: S.plan.items.length };
+  }
+  function budgetCap() {
+    var nums = String(S.facts.budget || "").match(/\d+(?:\.\d+)?/g);
+    if (!nums || !nums.length) return null;
+    return parseFloat(nums[nums.length - 1]);
+  }
+  function updateMetrics() {
+    var gEl = el("vipx-m-guests"), tEl = el("vipx-m-tables"), cEl = el("vipx-m-cart"), rBtn = el("vipx-rebalance");
+    var guests = S.facts.guests || (S.plan && S.plan.guests) || null;
+    if (gEl) gEl.textContent = guests ? guests + " guests · plan for " + Math.ceil(guests * 1.12) + " with buffer" : "Add guests";
+    var tables = tablesCount();
+    if (tEl) tEl.textContent = tables ? "≈ " + tables + " tables · " + clothText() : "Add a table shape";
+    var cart = estimatedCart();
+    var cap = budgetCap();
+    if (cEl) {
+      if (!cart || !cart.priced) cEl.textContent = S.plan ? "Estimates not provided" : "No plan yet";
+      else cEl.textContent = "~$" + Math.round(cart.total) + " estimate" + (cap ? " of $" + cap + " budget" : "") + (cart.priced < cart.count ? " (partial)" : "");
+    }
+    if (rBtn) {
+      var over = !!(cart && cart.priced && cap && cart.total > cap);
+      rBtn.className = "vipx-rebalance" + (over ? " show" : "");
+    }
+    updateBufferBadge();
+  }
+  function updateBufferBadge() {
+    var badge = el("vipx-buffer-badge");
+    if (!badge) return;
+    var d = parseDate(S.facts.arrivalDate);
+    if (!d) { badge.style.display = "none"; badge.textContent = ""; return; }
+    var days = Math.round((d - todayStart()) / 86400000);
+    badge.style.display = "";
+    badge.textContent = days < 0 ? "That date has passed"
+      : days === 0 ? "Arriving today - order right away"
+      : "Event in " + days + (days === 1 ? " day" : " days") + " · order by " + fmtDate(addDays(d, -3));
+  }
+
+  /* ---------------- Thread ---------------- */
+  function scrollThread() { if (threadEl) threadEl.scrollTop = threadEl.scrollHeight; }
+  function addMsg(role, text, skipHistory) {
+    var box = document.createElement("div");
+    box.className = "vipx-msg " + role;
+    if (role === "assistant") renderRich(box, text);
+    else box.textContent = text;
+    threadEl.appendChild(box);
+    if (!skipHistory) {
+      S.history.push({ role: role, text: String(text || "") });
+      if (S.history.length > 40) S.history = S.history.slice(-40);
+    }
+    scrollThread();
+    return box;
+  }
+  function addWaiting(label) {
+    var box = document.createElement("div");
+    box.className = "vipx-msg assistant waiting";
+    box.textContent = label || "Thinking...";
+    threadEl.appendChild(box);
+    scrollThread();
+    return box;
+  }
+  function setBusy(next) {
+    busy = next;
+    [sendBtn, el("vipx-qa-send"), el("vipx-build-btn")].forEach(function (b) { if (b) b.disabled = next; });
+    if (inputEl) inputEl.disabled = next || !endpoint;
+  }
+
+  /* ---------------- Plan parsing ---------------- */
+  function extractPlan(text) {
+    var re = /```(?:json|vip-plan)?\s*\n([\s\S]*?)```/g;
+    var m, last = null;
+    while ((m = re.exec(String(text || ""))) !== null) last = m[1];
+    if (!last) return null;
+    try {
+      var obj = JSON.parse(last);
+      if (obj && Array.isArray(obj.items) && obj.items.length) return obj;
+    } catch (e) { /* fall through */ }
+    return null;
+  }
+  function stripPlanBlock(text) {
+    return String(text || "").replace(/```(?:json|vip-plan)?\s*\n[\s\S]*?```/g, "").trim();
+  }
+
+  /* ---------------- Chat ---------------- */
+  async function sendChat(text, opts) {
+    opts = opts || {};
+    if (busy) return;
+    if (!endpoint) { showDisconnected(); return; }
+    var message = String(text || "").trim();
+    if (!message && !opts.image) return;
+    var display = message || "Here is a photo of my venue - please take it into account.";
+    if (opts.image && message) display = message + " [photo attached]";
+    addMsg("user", display, true);
+    S.history.push({ role: "user", text: message + (opts.image ? " [photo attached]" : "") });
+    if (S.history.length > 40) S.history = S.history.slice(-40);
+    setBusy(true);
+    var waiting = addWaiting(opts.intent === "plan" ? "Building your plan..." : "Thinking...");
+    try {
+      var payload = {
+        message: message,
+        history: S.history.slice(0, -1).slice(-20),
+        guidedAnswers: guided()
+      };
+      if (opts.intent) payload.intent = opts.intent;
+      if (opts.image) payload.image = opts.image;
+      var res = await fetch(endpoint + (opts.intent === "plan" ? "/plan" : "/chat"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      var data = null;
+      try { data = await res.json(); } catch (e) { /* handled below */ }
+      if (!res.ok || !data || data.ok !== true || typeof data.reply !== "string") throw new Error("unavailable");
+      waiting.remove();
+      handleReply(data.reply);
+    } catch (e) {
+      waiting.remove();
+      addMsg("assistant", "I couldn't reach the planning concierge just now. Please try again in a moment, or call or text (" + PHONE_DISPLAY + ") for help.");
+    } finally {
+      setBusy(false);
+      saveSession();
+    }
+  }
+  function handleReply(reply) {
+    var plan = extractPlan(reply);
+    var prose = plan ? stripPlanBlock(reply) : reply;
+    if (prose) addMsg("assistant", prose, true);
+    S.history.push({ role: "assistant", text: String(reply || "") });
+    if (S.history.length > 40) S.history = S.history.slice(-40);
+    if (plan) {
+      S.plan = plan;
+      S.packs = {};
+      renderOutput();
+      showToast("Your plan is ready - scroll down to see it.", true);
+    }
+    updateMetrics();
+  }
+
+  /* ---------------- Output zones ---------------- */
+  function packBadge(item, idx) {
+    var packs = currentPacks(idx, item);
+    if (item.perPack) {
+      var unit = String(item.unit || "pieces");
+      var pretty = unit.charAt(0).toUpperCase() + unit.slice(1);
+      return packs + (packs === 1 ? " Pack" : " Packs") + " • " + (packs * item.perPack) + " " + pretty;
+    }
+    return String(item.quantity || packs + (packs === 1 ? " pack" : " packs"));
+  }
+  function itemLine(item, idx) {
+    return item.name + " - " + packBadge(item, idx) + " - " + retailerLabel(item.retailer) + ": " + searchUrl(item.retailer, item.search || item.name);
+  }
+  function bundleText() {
+    var lines = [];
+    var guests = S.facts.guests || (S.plan && S.plan.guests);
+    lines.push("Our VIP Events shopping list" + (guests ? " for " + guests + " guests" : "") + (S.plan && S.plan.colors ? " (" + S.plan.colors + ")" : "") + ":");
+    lines.push("");
+    S.plan.items.forEach(function (item, idx) { lines.push("• " + itemLine(item, idx)); });
+    var cart = estimatedCart();
+    if (cart && cart.priced) lines.push("", "Estimated cart: ~$" + Math.round(cart.total) + " (rough plan estimates - check live prices).");
+    lines.push("", DIRECT_NOTE);
+    return lines.join("\n");
+  }
+  function updateShareLinks() {
+    if (!S.plan) return;
+    var wa = el("vipx-wa"), sms = el("vipx-sms");
+    var text = bundleText();
+    if (wa) wa.href = "https://wa.me/?text=" + encodeURIComponent(text);
+    if (sms) sms.href = "sms:?&body=" + encodeURIComponent(text);
+  }
+  function buildCard(item, idx) {
+    var card = document.createElement("article");
+    card.className = "vipx-pcard";
+    var top = document.createElement("div");
+    top.className = "vipx-pcard-top";
+    var badge = document.createElement("span");
+    badge.className = "vipx-badge";
+    badge.textContent = packBadge(item, idx);
+    top.appendChild(badge);
+    var shareBtn = document.createElement("button");
+    shareBtn.type = "button";
+    shareBtn.className = "vipx-share-btn";
+    shareBtn.textContent = "🔗 Share";
+    shareBtn.setAttribute("aria-label", "Copy a shareable link line for " + item.name);
+    shareBtn.addEventListener("click", function () { copyText(itemLine(item, idx), "Copied!"); });
+    top.appendChild(shareBtn);
+    card.appendChild(top);
+
+    var main = document.createElement("div");
+    main.className = "vipx-pcard-main";
+    var tile = document.createElement("div");
+    tile.className = "vipx-tile";
+    tile.setAttribute("aria-hidden", "true");
+    var letter = document.createElement("span");
+    letter.textContent = String(item.name || "?").trim().charAt(0).toUpperCase() || "?";
+    tile.appendChild(letter);
+    var dot = document.createElement("span");
+    dot.className = "vipx-tile-dot";
+    dot.style.background = item.dot || colourHex(S.facts.colors[0]) || "#d9a514";
+    tile.appendChild(dot);
+    main.appendChild(tile);
+    var texts = document.createElement("div");
+    var name = document.createElement("div");
+    name.className = "vipx-pcard-name";
+    name.textContent = item.name || "Item";
+    texts.appendChild(name);
+    if (item.spec) {
+      var spec = document.createElement("div");
+      spec.className = "vipx-pcard-spec";
+      spec.textContent = item.spec;
+      texts.appendChild(spec);
+    }
+    if (item.quantity) {
+      var qty = document.createElement("div");
+      qty.className = "vipx-pcard-spec";
+      qty.textContent = "You need: " + item.quantity;
+      texts.appendChild(qty);
+    }
+    main.appendChild(texts);
+    card.appendChild(main);
+
+    if (item.why) {
+      var why = document.createElement("p");
+      why.className = "vipx-why";
+      why.textContent = "Why picked: " + item.why;
+      card.appendChild(why);
+    }
+    var info = orderByInfo();
+    var del = document.createElement("p");
+    del.className = "vipx-delivery" + (info.warn ? " warn" : "");
+    del.textContent = info.text;
+    card.appendChild(del);
+
+    var actions = document.createElement("div");
+    actions.className = "vipx-pcard-actions";
+    var stepper = document.createElement("div");
+    stepper.className = "vipx-pack-stepper";
+    var minus = document.createElement("button");
+    minus.type = "button";
+    minus.textContent = "−";
+    minus.setAttribute("aria-label", "One pack fewer of " + item.name);
+    var count = document.createElement("span");
+    count.className = "vipx-pack-count";
+    count.textContent = String(currentPacks(idx, item));
+    var plus = document.createElement("button");
+    plus.type = "button";
+    plus.textContent = "+";
+    plus.setAttribute("aria-label", "One pack more of " + item.name);
+    function step(delta) {
+      var next = Math.min(99, Math.max(1, currentPacks(idx, item) + delta));
+      S.packs[idx] = next;
+      count.textContent = String(next);
+      badge.textContent = packBadge(item, idx);
+      updateMetrics();
+      updateShareLinks();
+      saveSession();
+    }
+    minus.addEventListener("click", function () { step(-1); });
+    plus.addEventListener("click", function () { step(1); });
+    stepper.appendChild(minus);
+    stepper.appendChild(count);
+    stepper.appendChild(plus);
+    actions.appendChild(stepper);
+    var packsLabel = document.createElement("span");
+    packsLabel.className = "vipx-est";
+    packsLabel.textContent = "packs";
+    actions.appendChild(packsLabel);
+    var swap = document.createElement("button");
+    swap.type = "button";
+    swap.className = "vipx-swap-btn";
+    swap.textContent = "Swap";
+    swap.addEventListener("click", function () { openSwap(idx); });
+    actions.appendChild(swap);
+    card.appendChild(actions);
+
+    if (item.estimate) {
+      var est = document.createElement("div");
+      est.className = "vipx-est";
+      est.innerHTML = "Plan estimate: <strong>" + escapeHtml(item.estimate) + "</strong> - check the live price";
+      card.appendChild(est);
+    }
+    var buy = document.createElement("a");
+    buy.className = "vipx-buy";
+    buy.href = searchUrl(item.retailer, item.search || item.name);
+    buy.target = "_blank";
+    buy.rel = "noopener";
+    buy.textContent = retailerLabel(item.retailer) + " ↗";
+    card.appendChild(buy);
+    return card;
+  }
+  function colourHex(name) {
+    if (!name) return null;
+    for (var i = 0; i < COLOUR_CHART.length; i++) {
+      if (COLOUR_CHART[i].name.toLowerCase() === String(name).toLowerCase()) return COLOUR_CHART[i].hex;
+    }
+    return null;
+  }
+  function renderOutput() {
+    if (!S.plan) return;
+    outputEl.className = "vipx-output show";
+    /* Blueprint */
+    var bp = el("vipx-blueprint-body");
+    if (bp) bp.textContent = S.plan.blueprint || "Your setup blueprint will appear here with your plan.";
+    var fin = el("vipx-finish");
+    if (fin) {
+      if (S.plan.finishAdvice) {
+        fin.style.display = "";
+        fin.innerHTML = "<strong>Finish matching:</strong> " + escapeHtml(S.plan.finishAdvice);
+      } else fin.style.display = "none";
+    }
+    var geom = el("vipx-geom");
+    if (geom) {
+      var tables = tablesCount();
+      geom.innerHTML = tables
+        ? "Your setup math: <strong>≈ " + tables + " tables</strong> · <strong>" + escapeHtml(clothText()) + "</strong> · one centrepiece per table, candles grouped between them."
+        : "Tip: add your guest count and table shape in the Quick-Pick Builder and the cloth sizes will be worked out here.";
+    }
+    /* Cards grouped by zone */
+    cardsEl.innerHTML = "";
+    var groups = {};
+    var order = [];
+    S.plan.items.forEach(function (item, idx) {
+      var zone = item.zone || "Your items";
+      if (!groups[zone]) { groups[zone] = []; order.push(zone); }
+      groups[zone].push(idx);
+    });
+    order.sort(function (a, b) {
+      var ia = ZONE_ORDER.indexOf(a), ib = ZONE_ORDER.indexOf(b);
+      if (ia < 0) ia = 99; if (ib < 0) ib = 99;
+      return ia - ib;
+    });
+    order.forEach(function (zone) {
+      var title = document.createElement("h5");
+      title.className = "vipx-group-title";
+      title.textContent = zone;
+      cardsEl.appendChild(title);
+      var grid = document.createElement("div");
+      grid.className = "vipx-grid";
+      groups[zone].forEach(function (idx) { grid.appendChild(buildCard(S.plan.items[idx], idx)); });
+      cardsEl.appendChild(grid);
+    });
+    /* Checklist */
+    var list = el("vipx-checklist-list");
+    if (list) {
+      list.innerHTML = "";
+      S.plan.items.forEach(function (item, idx) {
+        var row = document.createElement("label");
+        row.className = "vipx-check-row" + (S.checked[item.name] ? " done" : "");
+        var cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.checked = !!S.checked[item.name];
+        cb.addEventListener("change", function () {
+          S.checked[item.name] = cb.checked;
+          row.className = "vipx-check-row" + (cb.checked ? " done" : "");
+          saveSession();
+        });
+        row.appendChild(cb);
+        var body = document.createElement("span");
+        var nm = document.createElement("span");
+        nm.className = "vipx-check-name";
+        nm.textContent = item.name;
+        body.appendChild(nm);
+        var meta = document.createElement("span");
+        meta.className = "vipx-check-meta";
+        meta.textContent = " - " + packBadge(item, idx) + " · ";
+        body.appendChild(meta);
+        var link = document.createElement("a");
+        link.href = searchUrl(item.retailer, item.search || item.name);
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = retailerLabel(item.retailer) + " ↗";
+        body.appendChild(link);
+        row.appendChild(body);
+        list.appendChild(row);
+      });
+    }
+    /* Timeline */
+    var tl = el("vipx-timeline-list");
+    if (tl) {
+      tl.innerHTML = "";
+      var steps = (Array.isArray(S.plan.prepTimeline) && S.plan.prepTimeline.length) ? S.plan.prepTimeline : [
+        { when: "3 days before", text: "Unbox everything, check quantities against this checklist, and test the LED candle timers." },
+        { when: "1 day before", text: "Steam or lay the tablecloths, set out centrepieces, and charge or battery-check every light." },
+        { when: "3 hours before", text: "Set chargers, plates, glasses and flutes; fold napkins; weave the fairy lights down the runners; final candle check." }
+      ];
+      steps.forEach(function (step, i) {
+        var rowEl = document.createElement("div");
+        rowEl.className = "vipx-tl-step";
+        var num = document.createElement("span");
+        num.className = "vipx-tl-num";
+        num.textContent = String(i + 1);
+        rowEl.appendChild(num);
+        var body = document.createElement("div");
+        var strong = document.createElement("strong");
+        strong.textContent = step.when || "";
+        body.appendChild(strong);
+        var p = document.createElement("p");
+        p.textContent = step.text || "";
+        body.appendChild(p);
+        rowEl.appendChild(body);
+        tl.appendChild(rowEl);
+      });
+    }
+    /* Upsell */
+    var up = el("vipx-upsell-text");
+    if (up && S.plan.upsell) up.textContent = S.plan.upsell;
+    updateShareLinks();
+    updateMetrics();
+  }
+
+  /* ---------------- Modals ---------------- */
+  function openModal(m) { if (m) m.classList.add("open"); }
+  function closeModal(m) { if (m) m.classList.remove("open"); }
+  var swapModal = el("vipx-swap-modal");
+  function openSwap(idx) {
+    S.swapIdx = idx;
+    S.swapChoice = "";
+    var item = S.plan && S.plan.items[idx];
+    var title = el("vipx-swap-title");
+    if (title) title.textContent = "Swap: " + (item ? item.name : "item");
+    var custom = el("vipx-swap-custom");
+    if (custom) custom.value = "";
+    var presets = swapModal ? swapModal.querySelectorAll(".vipx-swap-preset") : [];
+    for (var i = 0; i < presets.length; i++) presets[i].classList.remove("selected");
+    openModal(swapModal);
+  }
+  var teamModal = el("vipx-team-modal");
+  function teamSummaryText() {
+    var lines = ["My event plan from the VIP Events planning concierge:"];
+    var colors = (S.facts.colors && S.facts.colors.join(", ")) || (S.plan && S.plan.colors) || "";
+    if (colors) lines.push("Colours: " + colors);
+    var guests = S.facts.guests || (S.plan && S.plan.guests);
+    if (guests) lines.push("Guests: " + guests);
+    var d = eventDate();
+    if (d) lines.push("Products must arrive by: " + fmtDateLong(d));
+    if (S.plan && S.plan.summary) lines.push("Theme: " + S.plan.summary);
+    if (S.plan && Array.isArray(S.plan.items)) {
+      lines.push("Items: " + S.plan.items.map(function (item, idx) { return item.name + " (" + packBadge(item, idx) + ")"; }).join("; "));
+    }
+    var cart = estimatedCart();
+    if (cart && cart.priced) lines.push("Estimated shopping cart: ~$" + Math.round(cart.total) + " (plan estimates)");
+    lines.push("I would like to talk about lighting & sound for this event.");
+    return lines.join("\n");
+  }
+  function refreshTeamSend() {
+    var send = el("vipx-team-send");
+    if (!send) return;
+    var name = (el("vipx-team-name") || {}).value || "";
+    var phone = (el("vipx-team-phone") || {}).value || "";
+    var city = (el("vipx-team-city") || {}).value || "";
+    var head = "Hi VIP Events!";
+    var who = [];
+    if (name) who.push("I'm " + name);
+    if (phone) who.push("my phone is " + phone);
+    if (city) who.push("I'm in " + city);
+    if (who.length) head += " " + who.join(", ") + ".";
+    var summaryEl = el("vipx-team-summary");
+    var body = head + "\n\n" + (summaryEl ? summaryEl.value : teamSummaryText());
+    send.href = "sms:" + TEAM_NUMBER + "?&body=" + encodeURIComponent(body);
+  }
+  function openTeam() {
+    var summaryEl = el("vipx-team-summary");
+    if (summaryEl) summaryEl.value = teamSummaryText();
+    refreshTeamSend();
+    openModal(teamModal);
+  }
+
+  /* ---------------- Builder ---------------- */
+  function updatePicked() {
+    var picked = el("vipx-picked");
+    if (!picked) return;
+    if (!S.facts.colors.length) {
+      picked.textContent = "No colours picked yet - tap the chart or describe them in your message.";
+      return;
+    }
+    picked.innerHTML = "";
+    picked.appendChild(document.createTextNode("Picked: "));
+    var strong = document.createElement("strong");
+    strong.textContent = S.facts.colors.join(", ");
+    picked.appendChild(strong);
+  }
+  function updateHarmony() {
+    var box = el("vipx-harmony");
+    if (!box) return;
+    var c = S.facts.colors;
+    var metallics = c.filter(function (n) { return ["Gold", "Champagne", "Silver"].indexOf(n) >= 0; });
+    if (metallics.length >= 2) {
+      box.innerHTML = "<strong>Finish watch:</strong> you picked more than one metallic (" + escapeHtml(metallics.join(" + ")) + "). Keep one finish family per item type - matte, brushed, or mirror - so the table reads as one designed set, and let ivory or cream separate them.";
+    } else if (c.indexOf("Navy") >= 0 || c.indexOf("Royal blue") >= 0) {
+      box.innerHTML = "<strong>Colour harmony tip:</strong> deep blues love a warm metallic and a calm neutral - ivory or cream napkins and cloths will keep a blue-and-gold table feeling rich, not heavy.";
+    } else if (c.length) {
+      box.innerHTML = "<strong>Colour harmony tip:</strong> lovely base. One metallic finish used consistently, plus ivory or cream as a balancer, will make " + escapeHtml(c.join(" and ")) + " look like one designed set.";
+    } else {
+      box.innerHTML = "<strong>Colour harmony tip:</strong> pick one hero colour and one metallic finish (matte gold, brushed champagne, or mirror gold). Mixing metallic finishes can clash - ivory or cream in between keeps the table calm and elegant.";
+    }
+  }
+  function buildSwatches() {
+    var grid = el("vipx-swatches");
+    if (!grid) return;
+    COLOUR_CHART.forEach(function (colour) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "vipx-swatch" + (S.facts.colors.indexOf(colour.name) >= 0 ? " selected" : "");
+      btn.setAttribute("aria-pressed", S.facts.colors.indexOf(colour.name) >= 0 ? "true" : "false");
+      btn.setAttribute("data-color", colour.name);
+      var dot = document.createElement("span");
+      dot.className = "vipx-dot";
+      dot.style.background = colour.hex;
+      btn.appendChild(dot);
+      var nm = document.createElement("span");
+      nm.textContent = colour.name;
+      btn.appendChild(nm);
+      btn.addEventListener("click", function () {
+        var idx = S.facts.colors.indexOf(colour.name);
+        if (idx >= 0) { S.facts.colors.splice(idx, 1); btn.classList.remove("selected"); btn.setAttribute("aria-pressed", "false"); }
+        else { S.facts.colors.push(colour.name); btn.classList.add("selected"); btn.setAttribute("aria-pressed", "true"); }
+        updatePicked();
+        updateHarmony();
+        saveSession();
+      });
+      grid.appendChild(btn);
+    });
+  }
+  function buildItems() {
+    var wrap = el("vipx-items");
+    if (!wrap) return;
+    ITEM_OPTIONS.forEach(function (item) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "vipx-ichip" + (S.facts.items.indexOf(item) >= 0 ? " selected" : "");
+      btn.textContent = item;
+      btn.setAttribute("data-item", item);
+      btn.addEventListener("click", function () {
+        var idx = S.facts.items.indexOf(item);
+        if (idx >= 0) { S.facts.items.splice(idx, 1); btn.classList.remove("selected"); }
+        else { S.facts.items.push(item); btn.classList.add("selected"); }
+        saveSession();
+      });
+      wrap.appendChild(btn);
+    });
+  }
+  function syncBuilder() {
+    var gv = el("vipx-guests-val");
+    if (gv) gv.textContent = S.facts.guests ? String(S.facts.guests) : "-";
+    var budget = el("vipx-budget");
+    if (budget) {
+      var nums = String(S.facts.budget || "").match(/\d+(?:\.\d+)?/g);
+      budget.value = nums && nums.length ? nums[nums.length - 1] : "";
+    }
+    var table = el("vipx-table");
+    if (table) table.value = S.facts.tableShape || "";
+    var menu = el("vipx-menu");
+    if (menu) menu.value = S.facts.menuStyle || "";
+    var stores = el("vipx-stores");
+    if (stores) stores.value = S.facts.stores || "";
+    var date = el("vipx-date");
+    if (date) date.value = S.facts.arrivalDate || "";
+    var led = el("vipx-led");
+    if (led) led.checked = !!S.facts.ledOnly;
+    var sw = el("vipx-swatches");
+    if (sw) {
+      var btns = sw.querySelectorAll(".vipx-swatch");
+      for (var i = 0; i < btns.length; i++) {
+        var on = S.facts.colors.indexOf(btns[i].getAttribute("data-color")) >= 0;
+        if (on) btns[i].classList.add("selected"); else btns[i].classList.remove("selected");
+      }
+    }
+    var iw = el("vipx-items");
+    if (iw) {
+      var chips = iw.querySelectorAll(".vipx-ichip");
+      for (var j = 0; j < chips.length; j++) {
+        var onItem = S.facts.items.indexOf(chips[j].getAttribute("data-item")) >= 0;
+        if (onItem) chips[j].classList.add("selected"); else chips[j].classList.remove("selected");
+      }
+    }
+    updatePicked();
+    updateHarmony();
+    updateMetrics();
+  }
+  function setGuests(n, fromRsvp) {
+    if (n === null || isNaN(n)) S.facts.guests = null;
+    else S.facts.guests = Math.max(1, Math.min(10000, Math.round(n)));
+    var gv = el("vipx-guests-val");
+    if (gv) gv.textContent = S.facts.guests ? String(S.facts.guests) : "-";
+    updateMetrics();
+    saveSession();
+    if (fromRsvp && S.plan && S.facts.guests) {
+      sendChat("15 more people just RSVP'd - we are now " + S.facts.guests + " guests. Please recalculate my whole plan, keeping my colours, finishes and stores the same.", { intent: "plan" });
+    }
+  }
+
+  /* ---------------- Photo ---------------- */
+  function processImage(dataUrl, name) {
+    function finish(finalUrl) {
+      if (!finalUrl) { showToast("That photo is too large - please try a smaller one."); return; }
+      pendingImage = { dataUrl: finalUrl };
+      if (photoThumb) photoThumb.src = finalUrl;
+      if (photoName) photoName.textContent = name || "Photo attached";
+      if (photoChip) photoChip.classList.add("show");
+      showToast("Photo attached - it will be sent with your next message.", true);
+    }
+    if (typeof Image === "undefined") { finish(dataUrl.length < 5000000 ? dataUrl : null); return; }
+    try {
+      var img = new Image();
+      img.onload = function () {
+        try {
+          var canvas = document.createElement("canvas");
+          if (!canvas.getContext) { finish(dataUrl); return; }
+          var max = 1024;
+          var scale = Math.min(1, max / Math.max(img.width || max, img.height || max));
+          canvas.width = Math.max(1, Math.round((img.width || max) * scale));
+          canvas.height = Math.max(1, Math.round((img.height || max) * scale));
+          var ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          finish(canvas.toDataURL("image/jpeg", 0.82));
+        } catch (e) { finish(dataUrl); }
+      };
+      img.onerror = function () { finish(dataUrl); };
+      img.src = dataUrl;
+    } catch (e) { finish(dataUrl); }
+  }
+  function clearPhoto() {
+    pendingImage = null;
+    if (photoChip) photoChip.classList.remove("show");
+    if (photoInput) photoInput.value = "";
+  }
+
+  /* ---------------- Composer / Q&A ---------------- */
+  function sendFromComposer() {
+    var text = inputEl ? inputEl.value.trim() : "";
+    var image = pendingImage ? pendingImage.dataUrl : null;
+    if (!text && !image) { if (inputEl) inputEl.focus(); return; }
+    if (inputEl) inputEl.value = "";
+    clearPhoto();
+    sendChat(text, { image: image });
+  }
+  function askQuestion(text) {
+    var hero = el("vipx-hero");
+    if (hero && typeof hero.scrollIntoView === "function") hero.scrollIntoView({ behavior: "smooth", block: "start" });
+    sendChat(text, {});
+  }
+
+  /* ---------------- Disconnected ---------------- */
+  function showDisconnected() {
+    if (pillEl) pillEl.classList.add("off");
+    if (liveTextEl) liveTextEl.textContent = "Being connected";
+    ["vipx-builder-card", "vipx-metrics", "vipx-qa-card"].forEach(function (id) {
+      var node = el(id);
+      if (node) node.style.display = "none";
+    });
+    if (resumeEl) resumeEl.classList.remove("show");
+    if (threadEl && !threadEl.children.length) {
+      var box = document.createElement("div");
+      box.className = "vipx-msg assistant";
+      var p = document.createElement("p");
+      p.textContent = "The planning concierge is being connected. It isn't live yet, so I can't build a plan here right now.";
+      box.appendChild(p);
+      var p2 = document.createElement("p");
+      p2.appendChild(document.createTextNode("For planning help today, please call or text "));
+      var link = document.createElement("a");
+      link.href = "tel:" + TEAM_NUMBER;
+      link.textContent = PHONE_DISPLAY;
+      p2.appendChild(link);
+      p2.appendChild(document.createTextNode("."));
+      box.appendChild(p2);
+      threadEl.appendChild(box);
+    }
+    setBusy(false);
+    if (inputEl) inputEl.disabled = true;
+    if (sendBtn) sendBtn.disabled = true;
+  }
+
+  /* ---------------- Resume ---------------- */
+  function restoreSession(saved) {
+    S = saved;
+    threadEl.innerHTML = "";
+    S.history.forEach(function (entry) {
+      if (entry.role === "user") addMsg("user", entry.text, true);
+      else {
+        var prose = stripPlanBlock(entry.text);
+        if (prose) addMsg("assistant", prose, true);
+      }
+    });
+    syncBuilder();
+    if (S.plan) renderOutput();
+    updateMetrics();
+  }
+
+  /* ---------------- Wiring ---------------- */
+  buildSwatches();
+  buildItems();
+
+  if (sendBtn) sendBtn.addEventListener("click", sendFromComposer);
+  if (inputEl) inputEl.addEventListener("keydown", function (ev) {
+    if (ev.key === "Enter" && (ev.metaKey || ev.ctrlKey)) { ev.preventDefault(); sendFromComposer(); }
+  });
+  var samples = section.querySelectorAll(".vipx-sample[data-sample]");
+  for (var si = 0; si < samples.length; si++) {
+    (function (btn) {
+      btn.addEventListener("click", function () {
+        if (inputEl) inputEl.value = btn.getAttribute("data-sample") || "";
+        sendFromComposer();
+      });
+    })(samples[si]);
+  }
+  var asks = section.querySelectorAll(".vipx-sample[data-ask]");
+  for (var qi = 0; qi < asks.length; qi++) {
+    (function (btn) {
+      btn.addEventListener("click", function () { askQuestion(btn.getAttribute("data-ask") || ""); });
+    })(asks[qi]);
+  }
+  var qaSend = el("vipx-qa-send");
+  if (qaSend) qaSend.addEventListener("click", function () {
+    var qa = el("vipx-qa-input");
+    var v = qa ? qa.value.trim() : "";
+    if (!v) return;
+    qa.value = "";
+    askQuestion(v);
+  });
+  var qaInput = el("vipx-qa-input");
+  if (qaInput) qaInput.addEventListener("keydown", function (ev) {
+    if (ev.key === "Enter") { ev.preventDefault(); if (qaSend) qaSend.click(); }
+  });
+
+  if (photoBtn && photoInput) photoBtn.addEventListener("click", function () { photoInput.click(); });
+  if (photoInput) photoInput.addEventListener("change", function () {
+    var f = photoInput.files && photoInput.files[0];
+    if (!f) return;
+    if (typeof FileReader === "undefined") { showToast("Photo upload is not available in this browser."); return; }
+    var reader = new FileReader();
+    reader.onload = function () { processImage(String(reader.result || ""), f.name || "Photo"); };
+    reader.onerror = function () { showToast("That photo could not be read - please try another."); };
+    reader.readAsDataURL(f);
+  });
+  var photoRemove = el("vipx-photo-remove");
+  if (photoRemove) photoRemove.addEventListener("click", clearPhoto);
+
+  var builderToggle = el("vipx-builder-toggle");
+  if (builderToggle) builderToggle.addEventListener("click", function () {
+    var body = el("vipx-builder-body");
+    var caret = el("vipx-builder-caret");
+    var open = body ? body.classList.toggle("open") : false;
+    builderToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    if (caret) caret.textContent = open ? "−" : "+";
+  });
+  var gMinus = el("vipx-guests-minus"), gPlus = el("vipx-guests-plus"), rsvp = el("vipx-rsvp15");
+  if (gMinus) gMinus.addEventListener("click", function () { setGuests((S.facts.guests || 0) - 1, false); });
+  if (gPlus) gPlus.addEventListener("click", function () { setGuests((S.facts.guests || 0) + 1, false); });
+  if (rsvp) rsvp.addEventListener("click", function () { setGuests((S.facts.guests || 0) + 15, true); });
+  var budgetInput = el("vipx-budget");
+  if (budgetInput) budgetInput.addEventListener("change", function () {
+    var v = parseFloat(budgetInput.value);
+    S.facts.budget = (!isNaN(v) && v > 0) ? "$" + v : "";
+    updateMetrics();
+    saveSession();
+  });
+  [["vipx-table", "tableShape"], ["vipx-menu", "menuStyle"], ["vipx-stores", "stores"]].forEach(function (pair) {
+    var node = el(pair[0]);
+    if (node) node.addEventListener("change", function () {
+      S.facts[pair[1]] = node.value;
+      updateMetrics();
+      saveSession();
+    });
+  });
+  var dateInput = el("vipx-date");
+  if (dateInput) dateInput.addEventListener("change", function () {
+    S.facts.arrivalDate = dateInput.value || "";
+    updateBufferBadge();
+    if (S.plan) renderOutput();
+    saveSession();
+  });
+  var ledToggle = el("vipx-led");
+  if (ledToggle) ledToggle.addEventListener("change", function () { S.facts.ledOnly = !!ledToggle.checked; saveSession(); });
+  var buildBtn = el("vipx-build-btn");
+  if (buildBtn) buildBtn.addEventListener("click", function () {
+    sendChat("Please build my full event plan from everything so far.", { intent: "plan" });
+  });
+  var rebalanceBtn = el("vipx-rebalance");
+  if (rebalanceBtn) rebalanceBtn.addEventListener("click", function () {
+    sendChat("My plan is over my budget. Please rebalance it with concrete trade-offs so it fits my budget, and return the updated plan.", { intent: "plan" });
+  });
+
+  var copyAll = el("vipx-copy-all");
+  if (copyAll) copyAll.addEventListener("click", function () { if (S.plan) copyText(bundleText(), "Copied!"); });
+  var printBtn = el("vipx-print-btn");
+  if (printBtn) printBtn.addEventListener("click", function () {
+    document.body.classList.add("vipx-printing");
+    if (typeof window !== "undefined" && window.print) window.print();
+    setTimeout(function () { document.body.classList.remove("vipx-printing"); }, 600);
+  });
+
+  if (swapModal) {
+    var presets = swapModal.querySelectorAll(".vipx-swap-preset");
+    for (var pi = 0; pi < presets.length; pi++) {
+      (function (btn) {
+        btn.addEventListener("click", function () {
+          S.swapChoice = btn.getAttribute("data-swap") || "";
+          for (var j = 0; j < presets.length; j++) presets[j].classList.remove("selected");
+          btn.classList.add("selected");
+          var custom = el("vipx-swap-custom");
+          if (custom) custom.value = "";
+        });
+      })(presets[pi]);
+    }
+    swapModal.addEventListener("click", function (ev) { if (ev.target === swapModal) closeModal(swapModal); });
+  }
+  var swapClose = el("vipx-swap-close");
+  if (swapClose) swapClose.addEventListener("click", function () { closeModal(swapModal); });
+  var swapGo = el("vipx-swap-go");
+  if (swapGo) swapGo.addEventListener("click", function () {
+    var item = S.plan && S.plan.items[S.swapIdx];
+    if (!item) { closeModal(swapModal); return; }
+    var custom = el("vipx-swap-custom");
+    var choice = (custom && custom.value.trim()) || S.swapChoice || "Show me a cheaper version of this item.";
+    closeModal(swapModal);
+    var hero = el("vipx-hero");
+    if (hero && typeof hero.scrollIntoView === "function") hero.scrollIntoView({ behavior: "smooth", block: "start" });
+    sendChat("Please swap this item: \"" + item.name + "\". " + choice + " Keep everything else in my plan the same and return the updated plan.", { intent: "plan" });
+  });
+
+  var sendPlanBtn = el("vipx-send-plan-btn");
+  if (sendPlanBtn) sendPlanBtn.addEventListener("click", openTeam);
+  ["vipx-team-name", "vipx-team-phone", "vipx-team-city"].forEach(function (id) {
+    var node = el(id);
+    if (node) node.addEventListener("input", refreshTeamSend);
+  });
+  var teamClose = el("vipx-team-close");
+  if (teamClose) teamClose.addEventListener("click", function () { closeModal(teamModal); });
+  if (teamModal) teamModal.addEventListener("click", function (ev) { if (ev.target === teamModal) closeModal(teamModal); });
+
+  var startOver = el("vipx-startover");
+  if (startOver) startOver.addEventListener("click", function () {
+    clearSession();
+    S = freshState();
+    clearPhoto();
+    threadEl.innerHTML = "";
+    outputEl.className = "vipx-output";
+    if (resumeEl) resumeEl.classList.remove("show");
+    syncBuilder();
+    updateMetrics();
+    greet();
+    showToast("Started fresh - your saved event was cleared from this device.", true);
+  });
+  var resumeBtn = el("vipx-resume-btn");
+  if (resumeBtn) resumeBtn.addEventListener("click", function () {
+    var saved = loadSession();
+    if (resumeEl) resumeEl.classList.remove("show");
+    if (saved) { restoreSession(saved); showToast("Welcome back - your event is restored.", true); }
+  });
+  var freshBtn = el("vipx-fresh-btn");
+  if (freshBtn) freshBtn.addEventListener("click", function () {
+    clearSession();
+    if (resumeEl) resumeEl.classList.remove("show");
+    greet();
+  });
+
+  function greet() {
+    addMsg("assistant", "Hello! I'm your VIP Events planning concierge. Describe your event in one message - colours, guests, budget, the day, what you need - attach a photo of the room if you like, or tap the Visual Quick-Pick Builder below. When you're ready, I'll build your full itemised plan with pack math, a setup blueprint, and a prep countdown.", true);
+  }
+
+  /* ---------------- Init ---------------- */
+  syncBuilder();
+  if (!endpoint) {
+    showDisconnected();
+  } else {
+    var savedSession = loadSession();
+    if (savedSession) {
+      if (resumeEl) resumeEl.classList.add("show");
+      greet();
+    } else {
+      greet();
+    }
+    updateMetrics();
+  }
+})();
+</script>
+<!-- VIP CONCIERGE V2 SCRIPT END -->
 </body>
 </html>
