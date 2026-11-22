@@ -539,6 +539,84 @@
   .hero>.wrap{position:relative;z-index:1}
   @media (prefers-reduced-motion: reduce){.hero-tunnel{display:none}}
 </style>
+<!-- VIP PLANNING CHAT STYLE START -->
+<style>
+  /* ---------- VIP Events Free Interactive Planning Chat ---------- */
+  .vipc-section{padding:64px 0;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 100%)}
+  .vipc-shell{background:#0d1226;color:#f5eeda;border:1px solid color-mix(in srgb, var(--gold) 62%, transparent);border-radius:26px;overflow:hidden;box-shadow:0 24px 60px rgba(13,18,38,.28)}
+  .vipc-hero{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;padding:36px}
+  .vipc-eyebrow{margin:0 0 9px;color:var(--gold-bright);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+  .vipc-hero h2{color:#fff;font-size:clamp(30px,4.5vw,44px);font-weight:600}
+  .vipc-hero h2 em{color:var(--gold-bright)}
+  .vipc-hero p{color:#d8dcef;max-width:68ch}
+  .vipc-hero p strong{color:#fff}
+  .vipc-points{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .vipc-points span{border:1px solid rgba(245,238,218,.25);background:rgba(255,255,255,.07);color:#f5eeda;border-radius:999px;padding:6px 11px;font-size:12.5px;font-weight:700}
+  .vipc-open{border:0;cursor:pointer;font:inherit;font-weight:800;font-size:16px;background:var(--gold);color:#fff;border-radius:999px;padding:15px 25px;box-shadow:0 12px 26px rgba(184,134,11,.35);white-space:nowrap}
+  .vipc-open:hover{background:var(--gold-bright)}
+  .vipc-panel{display:none;border-top:1px solid rgba(217,165,20,.38);background:#121936}
+  .vipc-panel.open{display:block}
+  .vipc-panel-head{display:flex;align-items:center;gap:14px;padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .vipc-panel-head strong{display:block;color:#fff;font-size:15px}
+  .vipc-panel-head span{display:block;color:#aeb6d5;font-size:13px;margin-top:1px}
+  .vipc-restart{margin-left:auto;border:1px solid rgba(245,238,218,.28);background:transparent;color:#f5eeda;border-radius:999px;padding:8px 13px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+  .vipc-restart:hover{border-color:var(--gold-bright);color:var(--gold-bright)}
+  .vipc-messages{display:grid;gap:12px;max-height:620px;overflow-y:auto;padding:22px}
+  .vipc-msg{max-width:88%;border-radius:16px;padding:13px 15px;font-size:15px;line-height:1.55;overflow-wrap:anywhere}
+  .vipc-msg p{margin:0 0 9px}.vipc-msg p:last-child{margin-bottom:0}
+  .vipc-msg ul{margin:6px 0 9px;padding-left:21px}.vipc-msg li{margin:3px 0}
+  .vipc-msg.assistant{background:#fff;color:#1c2340;justify-self:start;border-bottom-left-radius:5px}
+  .vipc-msg.user{background:var(--gold);color:#201a05;justify-self:end;border-bottom-right-radius:5px;font-weight:650}
+  .vipc-msg.waiting{color:#4a5170;font-style:italic}
+  .vipc-msg a{color:#8a6508;font-weight:800}
+  .vipc-table-wrap{overflow-x:auto;margin:12px 0;border:1px solid #e0d7bf;border-radius:12px}
+  .vipc-plan-table{border-collapse:collapse;width:100%;min-width:700px;background:#fff;color:#1c2340;font-size:13.5px;line-height:1.45}
+  .vipc-plan-table th{background:#101a3a;color:#eec44a;text-align:left;font-weight:800;padding:10px;border-bottom:2px solid #d9a514;vertical-align:top}
+  .vipc-plan-table td{padding:9px 10px;border-bottom:1px solid #e8e2d4;vertical-align:top}
+  .vipc-plan-table tr:last-child td{border-bottom:0}
+  .vipc-plan-table td:first-child{font-weight:750}
+  .vipc-quick{padding:0 22px 16px}
+  .vipc-quick-label{font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#aeb6d5;margin-bottom:9px}
+  .vipc-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .vipc-chip{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(245,238,218,.3);background:rgba(255,255,255,.06);color:#f5eeda;border-radius:999px;padding:8px 12px;font:inherit;font-size:13.5px;font-weight:700;cursor:pointer}
+  .vipc-chip:hover{border-color:var(--gold-bright);color:#fff;background:rgba(217,165,20,.15)}
+  .vipc-chip.selected{border-color:var(--gold-bright);background:var(--gold);color:#201a05}
+  .vipc-chip.selected:hover{background:var(--gold-bright);color:#201a05}
+  .vipc-chip.vipc-confirm{border-color:var(--gold-bright);background:rgba(217,165,20,.16);color:#fff}
+  .vipc-swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;flex-basis:100%}
+  .vipc-swatch{display:flex;flex-direction:column;align-items:center;gap:7px;border:1px solid rgba(245,238,218,.3);background:rgba(255,255,255,.06);color:#f5eeda;border-radius:14px;padding:10px 6px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;text-align:center}
+  .vipc-swatch:hover{border-color:var(--gold-bright);color:#fff}
+  .vipc-swatch .vipc-dot{width:26px;height:26px}
+  .vipc-swatch.selected{border-color:var(--gold-bright);background:rgba(217,165,20,.18);color:#fff}
+  .vipc-swatch.selected .vipc-dot{box-shadow:0 0 0 2px #121936,0 0 0 4px var(--gold-bright)}
+  .vipc-picked{flex-basis:100%;font-size:13px;color:#d8dcef}
+  .vipc-picked strong{color:#fff}
+  .vipc-actions{display:flex;flex-wrap:wrap;gap:8px;flex-basis:100%}
+  .vipc-dot{width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,.8);box-shadow:0 1px 5px rgba(0,0,0,.35);flex:none}
+  .vipc-date-row{display:none;align-items:end;gap:10px;flex-wrap:wrap;margin-top:13px}
+  .vipc-date-row.show{display:flex}
+  .vipc-date-row label{display:grid;gap:5px;color:#d8dcef;font-size:13px;font-weight:700}
+  .vipc-date-row input{font:inherit;color:#1c2340;background:#fff;border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:9px 11px}
+  .vipc-date-use{border:0;background:var(--gold);color:#fff;border-radius:999px;padding:10px 16px;font:inherit;font-weight:800;cursor:pointer}
+  .vipc-form{display:flex;gap:10px;padding:16px 22px 8px;border-top:1px solid rgba(255,255,255,.12)}
+  .vipc-input{flex:1;min-width:0;font:inherit;font-size:16px;color:#1c2340;background:#fff;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:12px 17px}
+  .vipc-input:focus{outline:3px solid rgba(217,165,20,.45);border-color:var(--gold-bright)}
+  .vipc-send{border:0;background:var(--gold);color:#fff;border-radius:999px;padding:12px 21px;font:inherit;font-weight:800;cursor:pointer}
+  .vipc-send:disabled,.vipc-open:disabled{opacity:.55;cursor:wait}
+  .vipc-privacy{margin:0;padding:7px 22px 20px;color:#8f97bb;font-size:12.5px}
+  .vipc-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  @media (max-width:760px){
+    .vipc-hero{grid-template-columns:1fr;padding:28px 22px}
+    .vipc-open{justify-self:start}
+    .vipc-messages{padding:17px 14px;max-height:560px}
+    .vipc-msg{max-width:96%}
+    .vipc-quick{padding:0 14px 14px}
+    .vipc-form{padding:14px 14px 7px}
+    .vipc-privacy{padding-left:14px;padding-right:14px}
+    .vipc-panel-head{padding:14px}
+  }
+</style>
+<!-- VIP PLANNING CHAT STYLE END -->
 </head>
 <body>
 
@@ -811,6 +889,40 @@
         <h2>Budget-friendly party supplies</h2>
         <p>The exact kinds of pieces we match for clients every week — paper goods, tableware, and décor that look high-end for a fraction of the price. Tap any item to order it on Amazon.</p>
       </div>
+<!-- FREE PLANNING BOX ADDITION START -->
+<style>
+  /* ---------- VIP Events FREE PLANNING box (supplies section) ---------- */
+  .vipfp-box{background:#fdf9ee;border:1px solid #e6d6ab;border-radius:20px;padding:24px 26px;margin:0 0 28px;box-shadow:0 10px 30px rgba(28,35,64,.08)}
+  .vipfp-eyebrow{margin:0 0 14px;font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+  .vipfp-row{display:flex;gap:22px;align-items:flex-start}
+  .vipfp-badge{flex:none;width:104px;height:104px;border-radius:50%;background:#101a3a;border:2px solid var(--gold-bright);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(16,26,58,.25)}
+  .vipfp-main{flex:1;min-width:0}
+  .vipfp-main h3{font-size:clamp(21px,3vw,27px);font-weight:600;margin:0 0 8px;color:#1c2340}
+  .vipfp-main p{margin:0;color:#3c435f}
+  .vipfp-btn{margin-top:16px;width:100%;border:0;cursor:pointer;font:inherit;font-weight:800;font-size:15.5px;background:#f59e0b;color:#fff;border-radius:999px;padding:14px 22px;display:inline-flex;align-items:center;justify-content:center;gap:9px}
+  .vipfp-btn:hover{background:#d97706}
+  @media (max-width:640px){
+    .vipfp-box{padding:20px}
+    .vipfp-row{flex-direction:column}
+    .vipfp-badge{width:84px;height:84px}
+  }
+</style>
+<div class="vipfp-box">
+  <p class="vipfp-eyebrow">Free planning</p>
+  <div class="vipfp-row">
+    <div class="vipfp-badge" aria-hidden="true">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#eec44a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path d="M12 6.6l1.05 2.75 2.75 1.05-2.75 1.05L12 14.2l-1.05-2.75L8.2 10.4l2.75-1.05z" fill="#7dd3fc" stroke="none"/></svg>
+    </div>
+    <div class="vipfp-main">
+      <h3>Get Your Custom Planning Details &amp; AI Recommendations</h3>
+      <p>We offer free, personalized event planning setups! Get custom matching links for your specific budget, venue, and style, along with recommended links on where to buy each item.</p>
+      <button class="vipfp-btn" type="button" id="vipc-fp-open">Get your planning details with recommendation
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+<!-- FREE PLANNING BOX ADDITION END -->
       <div class="grid grid-3">
         <article class="card supply-card" data-search-item data-kind="Supply" data-name="Gold dinnerware set for 50 guests" data-keywords="gold plates dinnerware set disposable cups cutlery napkins">
           <div class="s-cat">Tableware set</div>
@@ -963,6 +1075,53 @@
       </div>
     </div>
   </section>
+
+<!-- VIP PLANNING CHAT ADDITION START -->
+  <section class="vipc-section" id="planning-chat" aria-labelledby="vipc-title">
+    <div class="wrap">
+      <div class="vipc-shell">
+        <div class="vipc-hero">
+          <div>
+            <p class="vipc-eyebrow">Free planning tool</p>
+            <h2 id="vipc-title">Free Interactive <em>Planning Chat</em></h2>
+            <p>Answer six quick questions - <strong>colours, guest count, budget, items to plan, preferred stores, and arrival day</strong> - and receive a full itemised table for the event, with quantities matched to your guest count.</p>
+            <p>The plan covers napkins, candles, faux flowers, plates, cups, cutlery, table covers, chargers / paper rounds, serving pieces, and coordinating accessories. Shopping items are purchased directly by you from the retailer; they are <strong>not included</strong> in any VIP Events service price.</p>
+            <div class="vipc-points" aria-label="The six planning questions">
+              <span>1. Colours</span><span>2. Guests</span><span>3. Budget</span><span>4. Items</span><span>5. Stores</span><span>6. Arrival day</span>
+            </div>
+          </div>
+          <button class="vipc-open" type="button" id="vipc-open" aria-expanded="false" aria-controls="vipc-panel">Start planning chat</button>
+        </div>
+        <div class="vipc-panel" id="vipc-panel">
+          <div class="vipc-panel-head">
+            <div>
+              <strong id="vipc-progress">Planning chat</strong>
+              <span id="vipc-status">Six questions, then your full table.</span>
+            </div>
+            <button class="vipc-restart" type="button" id="vipc-restart">Start again</button>
+          </div>
+          <div class="vipc-messages" id="vipc-messages" aria-live="polite" aria-label="Planning chat messages"></div>
+          <div class="vipc-quick" id="vipc-quick">
+            <div class="vipc-quick-label" id="vipc-quick-label">Quick picks</div>
+            <div class="vipc-chips" id="vipc-chips"></div>
+            <div class="vipc-date-row" id="vipc-date-row">
+              <label for="vipc-date">Products must arrive by
+                <input type="date" id="vipc-date" />
+              </label>
+              <button class="vipc-date-use" type="button" id="vipc-date-use">Use this date</button>
+            </div>
+          </div>
+          <form class="vipc-form" id="vipc-form">
+            <label class="vipc-sr-only" for="vipc-input">Type your planning answer</label>
+            <input class="vipc-input" id="vipc-input" type="text" autocomplete="off" placeholder="Type your answer..." />
+            <button class="vipc-send" id="vipc-send" type="submit">Send</button>
+          </form>
+          <p class="vipc-privacy">Your answers are sent to the planning assistant only to create your plan. Please do not enter passwords, payment details, or other private information.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- VIP PLANNING CHAT ADDITION END -->
 
   <!-- ============ CONTACT ============ -->
   <section id="contact" style="padding-top:26px">
@@ -1609,5 +1768,676 @@ var ZIP3_STATE="005NY010MA011MA012MA013MA014MA015MA016MA017MA018MA019MA020MA021M
   }
 })();
 </script>
+<!-- VIP PLANNING CHAT SCRIPT START -->
+<script>
+(function () {
+  "use strict";
+
+  const VIP_CHAT = "https://vip-events-chat-backend.onrender.com";
+
+  var endpoint = VIP_CHAT.replace(/\/+$/, "");
+  var openBtn = document.getElementById("vipc-open");
+  var panel = document.getElementById("vipc-panel");
+  var messagesEl = document.getElementById("vipc-messages");
+  var progressEl = document.getElementById("vipc-progress");
+  var statusEl = document.getElementById("vipc-status");
+  var quickEl = document.getElementById("vipc-quick");
+  var quickLabel = document.getElementById("vipc-quick-label");
+  var chipsEl = document.getElementById("vipc-chips");
+  var dateRow = document.getElementById("vipc-date-row");
+  var dateInput = document.getElementById("vipc-date");
+  var dateUseBtn = document.getElementById("vipc-date-use");
+  var form = document.getElementById("vipc-form");
+  var input = document.getElementById("vipc-input");
+  var sendBtn = document.getElementById("vipc-send");
+  var restartBtn = document.getElementById("vipc-restart");
+  if (!openBtn || !panel || !messagesEl || !form || !input) return;
+
+  var COLOUR_CHART = [
+    { name: "Gold", hex: "#d9a514" },
+    { name: "Champagne", hex: "#e3c878" },
+    { name: "Ivory", hex: "#f3ead3" },
+    { name: "White", hex: "#ffffff" },
+    { name: "Navy", hex: "#1c2f63" },
+    { name: "Royal blue", hex: "#2447a8" },
+    { name: "Light blue", hex: "#9cc4e4" },
+    { name: "Blush pink", hex: "#e8a7b8" },
+    { name: "Burgundy", hex: "#7b1e35" },
+    { name: "Red", hex: "#b3232a" },
+    { name: "Sage green", hex: "#a8b79a" },
+    { name: "Mint", hex: "#bfe3cf" },
+    { name: "Lavender", hex: "#c3b2e0" },
+    { name: "Purple", hex: "#6c3fd4" },
+    { name: "Silver", hex: "#c0c6d4" },
+    { name: "Black", hex: "#161616" },
+    { name: "Brown", hex: "#7a4a2b" }
+  ];
+
+  var ITEM_OPTIONS = [
+    "Candle holders",
+    "Candles",
+    "Napkins",
+    "Plates",
+    "Paper goods (chargers & rounds)",
+    "Cups",
+    "Cutlery",
+    "Table covers",
+    "Faux flowers",
+    "Centrepieces"
+  ];
+
+  var questions = [
+    {
+      key: "colors",
+      type: "multi-colors",
+      title: "Question 1 of 6 - Event colours",
+      prompt: "Welcome! I can build your full event table. First, tap a few colours from the chart - you can pick more than one - or type your own colour names below.",
+      placeholder: "Type a colour name to add it..."
+    },
+    {
+      key: "guestCount",
+      title: "Question 2 of 6 - Guest count",
+      prompt: "Beautiful. How many people are you expecting?",
+      placeholder: "Type the number of guests...",
+      chips: [5, 10, 15, 20, 30, 40, 50, 75, 100].map(function (n) {
+        return { label: n + " guests", value: String(n) };
+      }).concat([{ label: "Type another amount", action: "focus" }])
+    },
+    {
+      key: "budget",
+      title: "Question 3 of 6 - Budget",
+      prompt: "What set price range should I plan within for the shopping items?",
+      placeholder: "Type your price range...",
+      chips: ["Under $100", "$100-$250", "$250-$500", "$500-$1,000", "$1,000-$2,500", "$2,500+"].map(function (v) {
+        return { label: v, value: v };
+      })
+    },
+    {
+      key: "items",
+      type: "multi-items",
+      title: "Question 4 of 6 - Items to plan",
+      prompt: "Which items should I search and plan for? Tap everything you want in your table, add your own below, or choose the full standard set.",
+      placeholder: "Type another item to add it..."
+    },
+    {
+      key: "stores",
+      title: "Question 5 of 6 - Websites and stores",
+      prompt: "Do you have specific websites or stores you want to buy from? Choose one, combine a few in your own answer, or choose no preference.",
+      placeholder: "Type the websites or stores...",
+      chips: [
+        { label: "No preference", value: "No preference - suggest suitable stores" },
+        { label: "Amazon", value: "Amazon" },
+        { label: "Walmart", value: "Walmart" },
+        { label: "Target", value: "Target" },
+        { label: "Amazon + Walmart", value: "Amazon and Walmart" },
+        { label: "Dollar Tree", value: "Dollar Tree" },
+        { label: "Type my own stores", action: "focus" }
+      ]
+    },
+    {
+      key: "arrivalDate",
+      title: "Question 6 of 6 - Arrival day",
+      prompt: "Finally, which day do the products need to arrive by? Pick a date below or type the day.",
+      placeholder: "Type or choose the arrival day...",
+      chips: [
+        { label: "In 3 days", days: 3 },
+        { label: "In 1 week", days: 7 },
+        { label: "In 2 weeks", days: 14 },
+        { label: "In 1 month", days: 30 }
+      ]
+    }
+  ];
+
+  var stage = 0;
+  var answers = {};
+  var history = [];
+  var started = false;
+  var busy = false;
+  var planReady = false;
+  var multiSelection = [];
+
+  function escapeHtml(text) {
+    return String(text || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function inlineHtml(text) {
+    var out = escapeHtml(text);
+    out = out.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    out = out.replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<em>$2</em>");
+    return out;
+  }
+
+  function isTableRow(line) {
+    return /^\s*\|.*\|\s*$/.test(line);
+  }
+
+  function splitTableRow(line) {
+    var trimmed = String(line).trim();
+    if (trimmed.charAt(0) === "|") trimmed = trimmed.slice(1);
+    if (trimmed.charAt(trimmed.length - 1) === "|") trimmed = trimmed.slice(0, -1);
+    return trimmed.split("|").map(function (cell) { return cell.trim(); });
+  }
+
+  function isSeparatorRow(line) {
+    if (!isTableRow(line)) return false;
+    return splitTableRow(line).every(function (cell) { return /^:?-{3,}:?$/.test(cell); });
+  }
+
+  function renderRich(container, text) {
+    var lines = String(text || "").split(/\r?\n/);
+    var i = 0;
+    while (i < lines.length) {
+      if (isTableRow(lines[i]) && i + 1 < lines.length && isSeparatorRow(lines[i + 1])) {
+        var headers = splitTableRow(lines[i]);
+        i += 2;
+        var rows = [];
+        while (i < lines.length && isTableRow(lines[i])) {
+          rows.push(splitTableRow(lines[i]));
+          i++;
+        }
+        var wrap = document.createElement("div");
+        wrap.className = "vipc-table-wrap";
+        var table = document.createElement("table");
+        table.className = "vipc-plan-table";
+        table.setAttribute("aria-label", "Your itemised event plan");
+        var thead = document.createElement("thead");
+        var headRow = document.createElement("tr");
+        headers.forEach(function (cell) {
+          var th = document.createElement("th");
+          th.scope = "col";
+          th.innerHTML = inlineHtml(cell);
+          headRow.appendChild(th);
+        });
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+        var tbody = document.createElement("tbody");
+        rows.forEach(function (row) {
+          var tr = document.createElement("tr");
+          headers.forEach(function (_, idx) {
+            var td = document.createElement("td");
+            td.innerHTML = inlineHtml(row[idx] || "");
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        wrap.appendChild(table);
+        container.appendChild(wrap);
+        continue;
+      }
+      if (!lines[i].trim()) { i++; continue; }
+      if (/^\s*[-*]\s+/.test(lines[i])) {
+        var ul = document.createElement("ul");
+        while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) {
+          var li = document.createElement("li");
+          li.innerHTML = inlineHtml(lines[i].replace(/^\s*[-*]\s+/, ""));
+          ul.appendChild(li);
+          i++;
+        }
+        container.appendChild(ul);
+        continue;
+      }
+      var para = [];
+      while (i < lines.length && lines[i].trim() && !isTableRow(lines[i]) && !/^\s*[-*]\s+/.test(lines[i])) {
+        para.push(lines[i].trim());
+        i++;
+      }
+      var p = document.createElement("p");
+      p.innerHTML = inlineHtml(para.join(" "));
+      container.appendChild(p);
+    }
+  }
+
+  function scrollMessages() {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function addMessage(role, text, skipHistory) {
+    var box = document.createElement("div");
+    box.className = "vipc-msg " + role;
+    if (role === "assistant") renderRich(box, text);
+    else box.textContent = text;
+    messagesEl.appendChild(box);
+    if (!skipHistory) {
+      history.push({ role: role, text: String(text || "") });
+      if (history.length > 40) history = history.slice(-40);
+    }
+    scrollMessages();
+    return box;
+  }
+
+  function addWaiting() {
+    var box = document.createElement("div");
+    box.className = "vipc-msg assistant waiting";
+    box.textContent = "Building your answer...";
+    messagesEl.appendChild(box);
+    scrollMessages();
+    return box;
+  }
+
+  function setBusy(next) {
+    busy = next;
+    sendBtn.disabled = next;
+    input.disabled = next || !endpoint;
+  }
+
+  function futureDate(days) {
+    var d = new Date();
+    d.setDate(d.getDate() + days);
+    return d;
+  }
+
+  function formatDateValue(date) {
+    var y = date.getFullYear();
+    var m = String(date.getMonth() + 1).padStart(2, "0");
+    var d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function niceDate(value) {
+    var m = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!m) return value;
+    var d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+    return d.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+  }
+
+  function showAdjustmentChips() {
+    quickLabel.textContent = "Adjust your plan";
+    chipsEl.innerHTML = "";
+    dateRow.classList.remove("show");
+    [
+      "Make it more budget-friendly",
+      "Swap one of the colours",
+      "Use a different store",
+      "Make it more premium",
+      "Reduce decorative extras"
+    ].forEach(function (label) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "vipc-chip";
+      btn.textContent = label;
+      btn.addEventListener("click", function () { sendFreeMessage(label); });
+      chipsEl.appendChild(btn);
+    });
+  }
+
+  function joinNames(list) {
+    if (list.length <= 1) return list.join("");
+    if (list.length === 2) return list[0] + " and " + list[1];
+    return list.slice(0, -1).join(", ") + " and " + list[list.length - 1];
+  }
+
+  function makePickedLine() {
+    var line = document.createElement("div");
+    line.className = "vipc-picked";
+    return line;
+  }
+
+  function updatePickedLine(line, emptyText) {
+    if (!multiSelection.length) { line.textContent = emptyText; return; }
+    line.innerHTML = "";
+    line.appendChild(document.createTextNode("Picked: "));
+    var strong = document.createElement("strong");
+    strong.textContent = multiSelection.join(", ");
+    line.appendChild(strong);
+  }
+
+  function makeActions(buttons) {
+    var row = document.createElement("div");
+    row.className = "vipc-actions";
+    buttons.forEach(function (spec) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "vipc-chip" + (spec.confirm ? " vipc-confirm" : "");
+      btn.textContent = spec.label;
+      btn.addEventListener("click", spec.onClick);
+      row.appendChild(btn);
+    });
+    return row;
+  }
+
+  function toggleMulti(name, btn) {
+    var idx = multiSelection.indexOf(name);
+    if (idx >= 0) {
+      multiSelection.splice(idx, 1);
+      btn.classList.remove("selected");
+      btn.setAttribute("aria-pressed", "false");
+    } else {
+      multiSelection.push(name);
+      btn.classList.add("selected");
+      btn.setAttribute("aria-pressed", "true");
+    }
+  }
+
+  function renderColorChart() {
+    quickLabel.textContent = "Colour chart - tap a few, or type your own below";
+    var grid = document.createElement("div");
+    grid.className = "vipc-swatch-grid";
+    var pickedLine = makePickedLine();
+    COLOUR_CHART.forEach(function (colour) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "vipc-swatch";
+      btn.setAttribute("aria-pressed", "false");
+      var dot = document.createElement("span");
+      dot.className = "vipc-dot";
+      dot.style.background = colour.hex;
+      btn.appendChild(dot);
+      var name = document.createElement("span");
+      name.textContent = colour.name;
+      btn.appendChild(name);
+      btn.addEventListener("click", function () {
+        toggleMulti(colour.name, btn);
+        updatePickedLine(pickedLine, "No colours picked yet - tap the chart or type your own.");
+      });
+      grid.appendChild(btn);
+    });
+    chipsEl.appendChild(grid);
+    updatePickedLine(pickedLine, "No colours picked yet - tap the chart or type your own.");
+    chipsEl.appendChild(pickedLine);
+    chipsEl.appendChild(makeActions([
+      { label: "Use these colours", confirm: true, onClick: function () { submitMulti(""); } },
+      { label: "Type my own colours", onClick: function () { input.focus(); } }
+    ]));
+  }
+
+  function renderItemPicker() {
+    quickLabel.textContent = "Tap the items you want - or type your own below";
+    var pickedLine = makePickedLine();
+    ITEM_OPTIONS.forEach(function (item) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "vipc-chip";
+      btn.setAttribute("aria-pressed", "false");
+      btn.textContent = item;
+      btn.addEventListener("click", function () {
+        toggleMulti(item, btn);
+        updatePickedLine(pickedLine, "Nothing picked yet - or choose the full standard set.");
+      });
+      chipsEl.appendChild(btn);
+    });
+    updatePickedLine(pickedLine, "Nothing picked yet - or choose the full standard set.");
+    chipsEl.appendChild(pickedLine);
+    chipsEl.appendChild(makeActions([
+      { label: "Continue with these items", confirm: true, onClick: function () { submitMulti(""); } },
+      { label: "Plan the full set instead", onClick: function () { answerFullSet(); } }
+    ]));
+  }
+
+  /* Multi-select steps (colours, items): combine the tapped picks with
+     an optional typed entry, record the answer, and move on. Colours
+     are stored as one readable string, items as an array so the back
+     end can normalise the checklist. */
+  function submitMulti(extraText) {
+    if (busy || planReady) return;
+    var q = questions[stage];
+    if (!q || !q.type) return;
+    var picked = multiSelection.slice();
+    var extra = String(extraText || "").trim();
+    if (extra && picked.indexOf(extra) < 0) picked.push(extra);
+    if (q.key === "colors") {
+      if (!picked.length) {
+        addMessage("assistant", "Please tap at least one colour from the chart, or type a colour name.");
+        return;
+      }
+      var display = joinNames(picked);
+      addMessage("user", display);
+      answers.colors = display;
+    } else if (q.key === "items") {
+      answers.items = picked;
+      addMessage("user", picked.length ? picked.join(", ") : "The full standard set");
+    }
+    stage++;
+    if (stage < questions.length) askCurrent(true);
+    else createPlan();
+  }
+
+  function answerFullSet() {
+    if (busy || planReady) return;
+    var q = questions[stage];
+    if (!q || q.key !== "items") return;
+    answers.items = [];
+    addMessage("user", "The full standard set, please");
+    stage++;
+    if (stage < questions.length) askCurrent(true);
+    else createPlan();
+  }
+
+  function renderChips() {
+    chipsEl.innerHTML = "";
+    dateRow.classList.remove("show");
+    if (planReady) { showAdjustmentChips(); return; }
+    var q = questions[stage];
+    if (!q) return;
+    multiSelection = [];
+    if (q.type === "multi-colors") { renderColorChart(); input.placeholder = q.placeholder; return; }
+    if (q.type === "multi-items") { renderItemPicker(); input.placeholder = q.placeholder; return; }
+    quickLabel.textContent = "Quick picks - or type your own answer";
+    q.chips.forEach(function (chip) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "vipc-chip";
+      if (chip.colors) {
+        var dot = document.createElement("span");
+        dot.className = "vipc-dot";
+        dot.style.background = "linear-gradient(90deg," + chip.colors[0] + " 0 50%," + chip.colors[1] + " 50% 100%)";
+        btn.appendChild(dot);
+      }
+      var label = document.createElement("span");
+      label.textContent = chip.label;
+      btn.appendChild(label);
+      btn.addEventListener("click", function () {
+        if (chip.action === "focus") { input.focus(); return; }
+        if (chip.days) {
+          var d = futureDate(chip.days);
+          answerCurrent(formatDateValue(d));
+          return;
+        }
+        answerCurrent(chip.value || chip.label);
+      });
+      chipsEl.appendChild(btn);
+    });
+    if (q.key === "arrivalDate") dateRow.classList.add("show");
+    input.placeholder = q.placeholder;
+  }
+
+  function askCurrent(pushToHistory) {
+    var q = questions[stage];
+    if (!q) return;
+    progressEl.textContent = q.title;
+    statusEl.textContent = "Tap a quick pick or type your own answer.";
+    addMessage("assistant", q.prompt, pushToHistory === false);
+    renderChips();
+  }
+
+  function validateAnswer(value) {
+    var q = questions[stage];
+    var text = String(value || "").trim();
+    if (!text) return null;
+    if (q.key === "guestCount") {
+      var m = text.replace(/,/g, "").match(/\b(\d{1,5})\b/);
+      if (!m) return { error: "I need a number for the guest count - for example, 40." };
+      var n = parseInt(m[1], 10);
+      if (n < 1 || n > 10000) return { error: "Please give me a guest count between 1 and 10,000." };
+      return { value: n, display: n + (n === 1 ? " guest" : " guests") };
+    }
+    if (q.key === "arrivalDate") return { value: text, display: niceDate(text) };
+    return { value: text, display: text };
+  }
+
+  function answerCurrent(rawValue) {
+    if (busy || planReady) return;
+    var checked = validateAnswer(rawValue);
+    if (!checked) return;
+    if (checked.error) {
+      addMessage("assistant", checked.error);
+      return;
+    }
+    var q = questions[stage];
+    addMessage("user", checked.display);
+    answers[q.key] = checked.value;
+    stage++;
+    if (stage < questions.length) askCurrent(true);
+    else createPlan();
+  }
+
+  async function callBackend(message) {
+    var res = await fetch(endpoint + "/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: message, history: history.slice(-20), guidedAnswers: answers })
+    });
+    var data = null;
+    try { data = await res.json(); } catch (_) { /* handled below */ }
+    if (!res.ok || !data || data.ok !== true || typeof data.reply !== "string") {
+      throw new Error("Planning assistant unavailable");
+    }
+    return data.reply;
+  }
+
+  async function createPlan() {
+    progressEl.textContent = "Building your full event table";
+    statusEl.textContent = "Matching quantities, colours, stores, and budget.";
+    chipsEl.innerHTML = "";
+    dateRow.classList.remove("show");
+    setBusy(true);
+    var waiting = addWaiting();
+    try {
+      var reply = await callBackend("Please create my full event plan from my answers.");
+      waiting.remove();
+      addMessage("assistant", reply);
+      planReady = true;
+      progressEl.textContent = "Your event plan is ready";
+      statusEl.textContent = "Ask for a colour swap, a different store, or a tighter budget.";
+      input.placeholder = "Ask for an adjustment...";
+      renderChips();
+    } catch (_) {
+      waiting.remove();
+      addMessage("assistant", "I couldn't reach the planning assistant just now. Please try again in a moment, or call or text (201) 649-3696 for help.");
+      stage = questions.length - 1;
+      askCurrent(false);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function sendFreeMessage(rawText) {
+    var text = String(rawText || "").trim();
+    if (!text || busy || !planReady) return;
+    addMessage("user", text);
+    input.value = "";
+    setBusy(true);
+    var waiting = addWaiting();
+    try {
+      var reply = await callBackend(text);
+      waiting.remove();
+      addMessage("assistant", reply);
+    } catch (_) {
+      waiting.remove();
+      addMessage("assistant", "I couldn't reach the planning assistant just now. Please try again in a moment, or call or text (201) 649-3696 for help.");
+    } finally {
+      setBusy(false);
+      input.focus();
+    }
+  }
+
+  function showDisconnected() {
+    progressEl.textContent = "Planning chat is being connected";
+    statusEl.textContent = "The free chat is not live yet.";
+    quickEl.style.display = "none";
+    form.style.display = "none";
+    restartBtn.style.display = "none";
+    var box = document.createElement("div");
+    box.className = "vipc-msg assistant";
+    var p = document.createElement("p");
+    p.textContent = "The Free Interactive Planning Chat is being connected. It isn't live yet, so I can't create a plan here right now.";
+    box.appendChild(p);
+    var p2 = document.createElement("p");
+    p2.appendChild(document.createTextNode("For planning help today, please call or text "));
+    var link = document.createElement("a");
+    link.href = "tel:+12016493696";
+    link.textContent = "201-649-3696";
+    p2.appendChild(link);
+    p2.appendChild(document.createTextNode("."));
+    box.appendChild(p2);
+    messagesEl.appendChild(box);
+  }
+
+  function startChat() {
+    messagesEl.innerHTML = "";
+    history = [];
+    answers = {};
+    stage = 0;
+    planReady = false;
+    started = true;
+    if (!endpoint) { showDisconnected(); return; }
+    quickEl.style.display = "";
+    form.style.display = "";
+    restartBtn.style.display = "";
+    askCurrent(true);
+    setTimeout(function () { input.focus(); }, 50);
+  }
+
+  openBtn.addEventListener("click", function () {
+    var isOpen = panel.classList.toggle("open");
+    openBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    openBtn.textContent = isOpen ? "Hide planning chat" : "Start planning chat";
+    if (isOpen && !started) startChat();
+  });
+
+  restartBtn.addEventListener("click", startChat);
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    if (busy) return;
+    var value = input.value.trim();
+    if (planReady) {
+      if (!value) return;
+      input.value = "";
+      sendFreeMessage(value);
+      return;
+    }
+    var q = questions[stage];
+    if (q && q.type) {
+      /* Multi-select step: a typed entry is added to the tapped picks
+         and the combined answer is submitted; an empty send simply
+         confirms the picks. */
+      input.value = "";
+      submitMulti(value);
+      return;
+    }
+    if (!value) return;
+    input.value = "";
+    answerCurrent(value);
+  });
+
+  dateUseBtn.addEventListener("click", function () {
+    var q = questions[stage];
+    if (!q || q.key !== "arrivalDate" || planReady) return;
+    if (!dateInput.value) { dateInput.focus(); return; }
+    answerCurrent(dateInput.value);
+  });
+
+  /* The FREE PLANNING box in the party-supplies section: its orange
+     button scrolls to this chat and opens the panel. */
+  var fpOpenBtn = document.getElementById("vipc-fp-open");
+  if (fpOpenBtn) {
+    fpOpenBtn.addEventListener("click", function () {
+      var section = document.getElementById("planning-chat");
+      if (section && typeof section.scrollIntoView === "function") {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      if (!panel.classList.contains("open")) openBtn.click();
+      else if (endpoint) input.focus();
+    });
+  }
+})();
+</script>
+<!-- VIP PLANNING CHAT SCRIPT END -->
 </body>
 </html>
