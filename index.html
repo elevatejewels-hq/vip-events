@@ -760,6 +760,22 @@
   #vipWelcomeOverlay .vwo-shimmer-3{animation-delay:1.8s}
   #vipWelcomeOverlay .vwo-shimmer-4{animation-delay:2.5s}
   #vipWelcomeOverlay .vwo-spacer{height:24px}
+  /* ==== Welcome carousel + welcome audio (owner order 2026-11-24) ==== */
+  #vipWelcomeOverlay{overflow-y:auto}
+  #vipWelcomeOverlay .vwo-carousel{position:relative;z-index:10;width:calc(100% + 40px);margin:0 -20px;max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .8s cubic-bezier(.22,1,.36,1),opacity .7s ease,margin-top .8s cubic-bezier(.22,1,.36,1)}
+  #vipWelcomeOverlay .vwo-carousel.on{max-height:252px;opacity:1;margin-top:18px}
+  #vipWelcomeOverlay .vwo-car-viewport{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px calc((100% - 78%) / 2);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  #vipWelcomeOverlay .vwo-car-viewport::-webkit-scrollbar{display:none}
+  #vipWelcomeOverlay .vwo-car-slide{position:relative;flex:0 0 78%;height:200px;margin:0;border-radius:18px;overflow:hidden;scroll-snap-align:center;background-size:cover;background-position:center;border:1px solid rgba(212,175,55,.45);box-shadow:0 4px 14px rgba(0,0,0,.25);will-change:transform,opacity}
+  #vipWelcomeOverlay .vwo-car-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,20,.80) 0%,rgba(5,5,20,.28) 42%,rgba(5,5,20,0) 65%)}
+  #vipWelcomeOverlay .vwo-car-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:12px 14px;text-align:center}
+  #vipWelcomeOverlay .vwo-car-title{font-family:'Cinzel',Georgia,serif;font-weight:700;font-size:19px;letter-spacing:2.5px;color:#f3d27a;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+  #vipWelcomeOverlay .vwo-car-sub{margin-top:3px;font-family:'Inter',sans-serif;font-size:12.5px;color:#fff;opacity:.94;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+  #vipWelcomeOverlay .vwo-car-sound{position:absolute;top:12px;right:14px;z-index:5;width:34px;height:34px;border-radius:50%;border:1px solid rgba(246,226,156,.6);background:rgba(10,10,30,.55);color:#f6e29c;align-items:center;justify-content:center;cursor:pointer;padding:0}
+  #vipWelcomeOverlay .vwo-car-sound svg{width:17px;height:17px;display:block}
+  @media (max-height:720px){#vipWelcomeOverlay .vwo-car-slide{height:158px}#vipWelcomeOverlay .vwo-carousel.on{max-height:206px}}
+  @media (prefers-reduced-motion:reduce){#vipWelcomeOverlay .vwo-carousel{transition:opacity .3s ease}}
+
   @media (min-width:640px){#vipWelcomeOverlay .vwo-spacer{height:32px}}
   /* The preview's custom non-blocking toast */
   .vwo-toast{position:fixed;bottom:20px;left:50%;z-index:320;opacity:0;pointer-events:none;
@@ -1158,7 +1174,12 @@
       <h2 class="vwo-title" id="vwoTitle">Welcome to VIP Events</h2>
       <p class="vwo-sub">Let us help you design your perfect experience.</p>
     </div>
-    <div class="vwo-grid vwo-stagger-3">
+        <div class="vwo-carousel" id="vwoCarousel" aria-hidden="true">
+      <div class="vwo-car-viewport" id="vwoCarViewport"></div>
+      <button type="button" class="vwo-car-sound" id="vwoCarSound" aria-label="Turn welcome sound off" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z" fill="currentColor" stroke="none"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9.4 9.4 0 0 1 0 13"/></svg></button>
+      <audio id="vwoWelcomeAudio" src="welcome.mp3" preload="auto"></audio>
+    </div>
+<div class="vwo-grid vwo-stagger-3">
       <button type="button" class="vwo-btn vwo-btn-gold" data-vwo-action="book" data-vwo-label="Book now, let's design your night">
         <span class="vwo-shimmer vwo-shimmer-1"></span>
         <span class="vwo-btn-text">Book now, let’s <br class="vwo-btn-br">design your night</span>
@@ -2511,6 +2532,130 @@ var ZIP3_STATE="005NY010MA011MA012MA013MA014MA015MA016MA017MA018MA019MA020MA021M
     bkResult.querySelector(".bk-sum-date").textContent = niceDate;
     bkResult.querySelector(".bk-sum-area").textContent = bkAreaInfo.city + ", " + bkAreaInfo.state + " (ZIP " + bkAreaInfo.zip + ")";
   });
+})();
+</script>
+<script>
+/* ==== Welcome carousel + welcome audio (owner order 2026-11-24) ====
+   After 3 seconds, if the welcome overlay is still open, a smooth
+   slideshow-style carousel of the site's own lighting photos appears
+   (centered card, peeking sides, scale/depth tied to scroll, auto
+   rotation, endless loop) and the 20-second welcome recording starts
+   (grand piano, welcome voice, strings/bass/band). If the phone holds
+   the sound until a first touch, it starts on that first touch. */
+(function(){
+  var overlay = document.getElementById('vipWelcomeOverlay');
+  var wrap = document.getElementById('vwoCarousel');
+  var view = document.getElementById('vwoCarViewport');
+  var audio = document.getElementById('vwoWelcomeAudio');
+  var soundBtn = document.getElementById('vwoCarSound');
+  if(!overlay || !wrap || !view) return;
+  var SLIDES = [
+    {alt:'Reception room set for an elegant event', t:'RECEPTION LIGHTING', s:'Rooms washed in rich, warm color'},
+    {alt:'Ballroom dance floor with professional speakers', t:'BALLROOM LIGHTING', s:'A dance floor that glows all night'},
+    {alt:'Outdoor dinner tables under a canopy', t:'STRING LIGHTS', s:'A canopy of warm light overhead'},
+    {alt:'Business event room with meeting tables', t:'STAGE LIGHTING', s:'Concert color for any room'},
+    {alt:'Backyard home party DJ setup', t:'BACKYARD PARTIES', s:'Big color and sound, right at home'},
+    {alt:'Round celebration dinner table', t:'HOME EVENTS', s:'Soft light for evenings at home'}
+  ];
+  var SVG_ON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z" fill="currentColor" stroke="none"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9.4 9.4 0 0 1 0 13"/></svg>';
+  var SVG_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z" fill="currentColor" stroke="none"/><line x1="16" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="16" y2="15"/></svg>';
+  var reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  function findSrc(key){
+    var imgs = document.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){ var a = imgs[i].getAttribute('alt') || ''; if(a.indexOf(key) > -1) return imgs[i].currentSrc || imgs[i].src; }
+    return null;
+  }
+  var built=false, timer=null, resumeAt=0, step=0, setW=0, started=false, soundOn=true;
+  function build(){
+    var slides=[];
+    SLIDES.forEach(function(cfg){ var src=findSrc(cfg.alt); if(src) slides.push({src:src, t:cfg.t, s:cfg.s}); });
+    if(!slides.length) return false;
+    var out='';
+    for(var copy=0; copy<3; copy++){
+      slides.forEach(function(sl){
+        out += '<figure class="vwo-car-slide" style="background-image:url(&quot;' + sl.src + '&quot;)"><figcaption class="vwo-car-cap"><div class="vwo-car-title">' + sl.t + '</div><div class="vwo-car-sub">' + sl.s + '</div></figcaption></figure>';
+      });
+    }
+    view.innerHTML = out;
+    built = true;
+    requestAnimationFrame(function(){
+      var first = view.querySelector('.vwo-car-slide');
+      if(first){ step = first.offsetWidth + 14; setW = step * slides.length; view.scrollLeft = setW; applyFx(); }
+    });
+    return true;
+  }
+  function applyFx(){
+    var els = view.children; if(!els.length || !step) return;
+    var center = view.scrollLeft + view.clientWidth/2;
+    for(var i=0;i<els.length;i++){
+      var el = els[i];
+      var c = el.offsetLeft + el.offsetWidth/2;
+      var d = Math.min(Math.abs(c-center)/step, 1);
+      el.style.transform = 'scale(' + (1 - 0.08*d).toFixed(3) + ')';
+      el.style.opacity = (1 - 0.15*d).toFixed(3);
+      el.style.boxShadow = d < 0.5 ? '0 14px 30px rgba(0,0,0,.45)' : '0 4px 14px rgba(0,0,0,.25)';
+    }
+  }
+  function loopFix(){
+    if(!setW) return;
+    if(view.scrollLeft < setW*0.5) view.scrollLeft += setW;
+    else if(view.scrollLeft > setW*1.5) view.scrollLeft -= setW;
+  }
+  var ticking=false;
+  view.addEventListener('scroll', function(){
+    if(!ticking){ ticking=true; requestAnimationFrame(function(){ applyFx(); loopFix(); ticking=false; }); }
+  }, {passive:true});
+  ['pointerdown','touchstart'].forEach(function(ev){
+    view.addEventListener(ev, function(){ resumeAt = Date.now() + 4500; }, {passive:true});
+  });
+  function stopAll(){
+    if(timer){ clearInterval(timer); timer=null; }
+    if(audio && !audio.paused){ try{ audio.pause(); }catch(e){} }
+  }
+  function advance(){
+    if(overlay.classList.contains('vwo-dismissed')){ stopAll(); return; }
+    if(Date.now() < resumeAt) return;
+    view.scrollBy({left: step, behavior:'smooth'});
+  }
+  function showSound(){ if(soundBtn) soundBtn.style.display='flex'; }
+  function markStarted(){ started=true; showSound(); }
+  function tryAudio(){
+    if(!audio || started) return;
+    try{
+      var p = audio.play();
+      if(p && p.then){ p.then(markStarted).catch(waitFirstTouch); }
+      else markStarted();
+    }catch(e){ waitFirstTouch(); }
+  }
+  function waitFirstTouch(){
+    var kick = function(){
+      overlay.removeEventListener('pointerdown', kick);
+      if(started || !audio) return;
+      try{ var p = audio.play(); if(p && p.then){ p.then(markStarted).catch(function(){}); } else markStarted(); }catch(e){}
+    };
+    overlay.addEventListener('pointerdown', kick);
+  }
+  if(soundBtn){
+    soundBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(!audio) return;
+      if(audio.paused){ audio.play(); soundOn=true; } else { audio.pause(); soundOn=false; }
+      soundBtn.innerHTML = soundOn ? SVG_ON : SVG_OFF;
+      soundBtn.setAttribute('aria-label', soundOn ? 'Turn welcome sound off' : 'Turn welcome sound on');
+    });
+  }
+  var mo = new MutationObserver(function(){
+    if(overlay.classList.contains('vwo-dismissed')){ stopAll(); mo.disconnect(); }
+  });
+  mo.observe(overlay, {attributes:true, attributeFilter:['class']});
+  setTimeout(function(){
+    if(overlay.classList.contains('vwo-dismissed')) return;
+    if(!build()) return;
+    wrap.classList.add('on');
+    wrap.setAttribute('aria-hidden','false');
+    if(!reduced) timer = setInterval(advance, 3400);
+    if(!reduced) tryAudio();
+  }, 3000);
 })();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
