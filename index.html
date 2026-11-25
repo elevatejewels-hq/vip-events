@@ -505,6 +505,18 @@
   .bk-summary .bk-dot{width:13px;height:13px;border-radius:50%;flex:none;border:2px solid rgba(0,0,0,.08)}
   .bk-contact{display:flex;gap:9px;flex-wrap:wrap}
   .bk-contact .btn{padding:11px 18px;font-size:14.5px}
+
+  .bk-details{display:none;margin-top:16px;padding-top:16px;border-top:1px solid color-mix(in srgb, var(--green) 35%, transparent)}
+  .bk-details.open{display:block;animation:bkDetailsIn .25s ease}
+  @keyframes bkDetailsIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  @media (prefers-reduced-motion: reduce){ .bk-details.open{animation:none} }
+  .bk-details .bk-step{margin-bottom:16px}
+  .bk-optional{font-weight:600;font-size:13px;color:var(--ink-3)}
+  textarea.bk-field{resize:vertical;min-height:86px;line-height:1.45}
+  .bk-field.bk-missing{border-color:var(--red);outline:2px solid color-mix(in srgb, var(--red) 50%, transparent);outline-offset:1px}
+  .bk-details-note{display:none;margin:0 0 12px;font-size:14px;font-weight:700;color:var(--red)}
+  .bk-details-note.show{display:block}
+  .bk-send-final{width:100%;justify-content:center;padding:12px 18px;font-size:15px}
   body.book-open{overflow:hidden}
   .bk-area{display:none;margin-top:10px;border-radius:10px;padding:11px 13px;font-size:14px;line-height:1.45}
   .bk-area.show{display:block}
@@ -2515,14 +2527,6 @@ var ZIP3_STATE="005NY010MA011MA012MA013MA014MA015MA016MA017MA018MA019MA020MA021M
     if (bkDate.value < iso){ showBkError("That date has already passed — please pick a date coming up."); bkDate.focus(); return; }
     var niceDate = new Date(bkDate.value + "T12:00:00").toLocaleDateString("en-US", {weekday:"long", year:"numeric", month:"long", day:"numeric"});
     var subject = encodeURIComponent("Booking request — " + bkType.value + " on " + niceDate);
-    var body = encodeURIComponent(
-      "Hi VIP Events! I'd like to book:\n\n" +
-      "Event: " + bkType.value + "\n" +
-      "Date: " + niceDate + "\n" +
-      "Area: " + bkAreaInfo.city + ", " + bkAreaInfo.state + " (ZIP " + bkAreaInfo.zip + ")\n" +
-      "Lighting color: " + bkColor.name + " (" + bkColor.hex + ")\n\n" +
-      "Please confirm this date is available. Thank you!"
-    );
     bkResult.classList.add("show");
     bkResult.innerHTML =
       "<h3>Your request is ready to send</h3>" +
@@ -2534,14 +2538,82 @@ var ZIP3_STATE="005NY010MA011MA012MA013MA014MA015MA016MA017MA018MA019MA020MA021M
         '<div><span class="k">Area</span><span class="bk-sum-area"></span></div>' +
       "</div>" +
       '<div class="bk-contact">' +
-        '<a class="btn btn-gold" href="mailto:vipeventsbookings@gmail.com?subject=' + subject + "&body=" + body + '">Send booking request</a>' +
+        '<button class="btn btn-gold" type="button" id="bk-send-open">Send booking request</button>' +
         '<a class="btn btn-ghost" href="tel:+12016493696">Call (201) 649-3696</a>' +
+      "</div>" +
+      '<div class="bk-details" id="bk-details">' +
+        '<div class="bk-step">' +
+          '<label for="bk-name"><span class="bk-num">5</span> Your name</label>' +
+          '<input class="bk-field" type="text" id="bk-name" autocomplete="name" placeholder="Your full name" />' +
+        "</div>" +
+        '<div class="bk-step">' +
+          '<label for="bk-phone"><span class="bk-num">6</span> Phone number to call back</label>' +
+          '<input class="bk-field" type="tel" id="bk-phone" autocomplete="tel" placeholder="e.g. (718) 555-0123" />' +
+        "</div>" +
+        '<div class="bk-step">' +
+          '<label for="bk-address"><span class="bk-num">7</span> Event address</label>' +
+          '<input class="bk-field" type="text" id="bk-address" autocomplete="street-address" placeholder="Street address of the event" />' +
+        "</div>" +
+        '<div class="bk-step">' +
+          '<label for="bk-message"><span class="bk-num">8</span> Anything else we should know? <span class="bk-optional">(optional)</span></label>' +
+          '<textarea class="bk-field" id="bk-message" rows="3" placeholder="Tell us anything that helps — room size, timing, special plans&hellip;"></textarea>' +
+        "</div>" +
+        '<p class="bk-details-note" id="bk-details-note" role="alert">Please add your name, phone and the event address so we can confirm your date.</p>' +
+        '<button class="btn btn-gold bk-send-final" type="button" id="bk-send-final">Send my request</button>' +
       "</div>";
     bkResult.querySelector(".bk-dot").style.background = bkColor.hex;
     bkResult.querySelector(".bk-sum-color").textContent = bkColor.name + " " + bkColor.hex;
     bkResult.querySelector(".bk-sum-type").textContent = bkType.value;
     bkResult.querySelector(".bk-sum-date").textContent = niceDate;
     bkResult.querySelector(".bk-sum-area").textContent = bkAreaInfo.city + ", " + bkAreaInfo.state + " (ZIP " + bkAreaInfo.zip + ")";
+    var bkDetails = document.getElementById("bk-details");
+    var bkSendOpen = document.getElementById("bk-send-open");
+    var bkName = document.getElementById("bk-name");
+    var bkPhone = document.getElementById("bk-phone");
+    var bkAddress = document.getElementById("bk-address");
+    var bkMessage = document.getElementById("bk-message");
+    var bkDetailsNote = document.getElementById("bk-details-note");
+    bkSendOpen.addEventListener("click", function(){
+      bkDetails.classList.add("open");
+      bkSendOpen.style.display = "none";
+      bkDetails.scrollIntoView({behavior:"smooth", block:"nearest"});
+      bkName.focus({preventScroll:true});
+    });
+    [bkName, bkPhone, bkAddress].forEach(function(field){
+      field.addEventListener("input", function(){
+        field.classList.remove("bk-missing");
+        if (bkName.value.trim() && bkPhone.value.trim() && bkAddress.value.trim()) bkDetailsNote.classList.remove("show");
+      });
+    });
+    document.getElementById("bk-send-final").addEventListener("click", function(){
+      var missing = [];
+      if (!bkName.value.trim()) missing.push(bkName);
+      if (!bkPhone.value.trim()) missing.push(bkPhone);
+      if (!bkAddress.value.trim()) missing.push(bkAddress);
+      [bkName, bkPhone, bkAddress].forEach(function(field){
+        field.classList.toggle("bk-missing", missing.indexOf(field) !== -1);
+      });
+      if (missing.length){
+        bkDetailsNote.classList.add("show");
+        bkDetailsNote.scrollIntoView({behavior:"smooth", block:"nearest"});
+        missing[0].focus({preventScroll:true});
+        return;
+      }
+      bkDetailsNote.classList.remove("show");
+      var body = encodeURIComponent(
+        "Hi VIP Events! I'd like to book:\n\n" +
+        "Event: " + bkType.value + "\n" +
+        "Date: " + niceDate + "\n" +
+        "Area: " + bkAreaInfo.city + ", " + bkAreaInfo.state + " (ZIP " + bkAreaInfo.zip + ")\n" +
+        "Lighting color: " + bkColor.name + " (" + bkColor.hex + ")\n\n" +
+        "Name: " + bkName.value.trim() + "\n" +
+        "Phone: " + bkPhone.value.trim() + "\n" +
+        "Event address: " + bkAddress.value.trim() + "\n" +
+        (bkMessage.value.trim() ? "Message: " + bkMessage.value.trim() + "\n" : "") +
+        "\nPlease confirm this date is available. Thank you!"
+      );
+      window.location.href = "mailto:vipeventsbookings@gmail.com?subject=" + subject + "&body=" + body;
+    });
   });
 })();
 </script>
