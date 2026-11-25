@@ -4,7 +4,24 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="color-scheme" content="light dark" />
-<link rel="icon" href="data:," />
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="description" content="VIP Events — Design & Planning. Beautiful lighting and high-end sound for private parties, business meetings and home events. Free planning: call or text (201) 649-3696.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VIP Events">
+<meta property="og:title" content="VIP Events — Design & Planning">
+<meta property="og:description" content="Beautiful lighting and high-end sound for your home event, business meeting or private party — planned for free. Call or text (201) 649-3696.">
+<meta property="og:url" content="https://vipevents.top/">
+<meta property="og:image" content="https://vipevents.top/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="VIP Events — Design & Planning">
+<meta name="twitter:description" content="Beautiful lighting and high-end sound for your home event, business meeting or private party — planned for free.">
+<meta name="twitter:image" content="https://vipevents.top/og-image.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"VIP Events","url":"https://vipevents.top/","logo":"https://vipevents.top/favicon.png","email":"vipeventsbookings@gmail.com","telephone":"+1-201-649-3696"}
+</script>
 <title>VIP Events — Design &amp; Planning</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -90,6 +107,9 @@
     box-shadow:0 6px 24px rgba(28,35,64,.05);
   }
   .topbar-in{display:flex;align-items:center;gap:14px;padding:10px 0}
+  /* Anchor jumps clear the sticky header (measured height + ~12px) */
+  main[id], section[id]{scroll-margin-top:90px}
+  @media (max-width:560px){ main[id], section[id]{scroll-margin-top:84px} }
   .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);min-width:0}
   .brand img{width:46px;height:46px;object-fit:cover;border-radius:10px;border:1px solid var(--gold)}
   .brand .b-name{font-family:"Playfair Display",serif;font-size:21px;font-weight:700;letter-spacing:.06em;white-space:nowrap}
@@ -532,13 +552,38 @@
   }
 </style>
 <style>
-  /* VIP hero 3D lighting tunnel — decorative background layer behind the hero content */
+  /* VIP hero background — three phases (owner's direction, 2026-11-24):
+     1) INTRO (first ~0.5s): the vivid 3D tunnel arcs show at full strength.
+     2) TRANSITION (~0.5s → ~2.3s): the tunnel fades away while a much
+        lighter wash slides in underneath it.
+     3) STEADY STATE: a built-in HTML/CSS layer of regular professional
+        event-lighting washes — warm gold, soft violet, royal blue, gentle
+        purple — rotating slowly and smoothly behind all hero content.
+     The logo card's own internal glow (.logo-glow) is separate; untouched. */
   .hero{position:relative}
-  .hero-tunnel{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity 2.5s cubic-bezier(0.25,1,0.5,1)}
-  .hero-tunnel.active{opacity:1}
+  .hero-tunnel{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:1;transition:opacity 1.8s cubic-bezier(0.25,1,0.5,1)}
+  .hero-tunnel.gone{opacity:0}
   .hero-tunnel canvas{display:block}
   .hero>.wrap{position:relative;z-index:1}
-  @media (prefers-reduced-motion: reduce){.hero-tunnel{display:none}}
+  .hero-wash{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;opacity:0;transform:translateY(-16px);transition:opacity 1.8s cubic-bezier(0.25,1,0.5,1),transform 1.8s cubic-bezier(0.25,1,0.5,1);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 6%,#000 82%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 6%,#000 82%,transparent 100%)}
+  .hero-wash.on{opacity:1;transform:translateY(0)}
+  .hero-wash-rotor{
+    position:absolute;left:50%;top:50%;width:170vmax;height:170vmax;
+    background:conic-gradient(from 0deg at 50% 50%,
+      rgba(233,183,76,.30) 0deg,
+      rgba(139,92,246,.24) 90deg,
+      rgba(64,110,235,.22) 180deg,
+      rgba(168,120,247,.25) 270deg,
+      rgba(233,183,76,.30) 360deg);
+    -webkit-mask-image:radial-gradient(closest-side,#000 26%,transparent 72%);
+    mask-image:radial-gradient(closest-side,#000 26%,transparent 72%);
+    animation:heroWashSpin 75s linear infinite;will-change:transform}
+  @keyframes heroWashSpin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+  @media (prefers-reduced-motion: reduce){
+    .hero-tunnel{display:none}
+    .hero-wash{opacity:1;transform:none;transition:none}
+    .hero-wash-rotor{animation:none}
+  }
 </style>
 <style>
   /* VIP hero logo box — animated event-uplighting glow behind the logo.
@@ -1190,6 +1235,7 @@
 
   <!-- ============ HERO + SEARCH ============ -->
   <div class="hero">
+    <div class="hero-wash" id="hero-wash" aria-hidden="true"><div class="hero-wash-rotor"></div></div>
     <div class="hero-tunnel" id="hero-tunnel" aria-hidden="true"></div>
     <div class="wrap hero-grid">
       <div>
@@ -1200,7 +1246,7 @@
 
 
         <div class="hero-cta">
-          <a class="btn btn-gold" href="#contact">Let&rsquo;s design your perfect night</a>
+          <a class="btn btn-gold" id="hero-book-btn" href="#">Let&rsquo;s design your perfect night</a>
           <a class="btn btn-ghost" href="#lab">Try the Lighting Lab</a>
         </div>
         <p class="free-note" style="margin-top:14px">Planning, design, layouts &amp; power planning — always free.</p>
@@ -2306,6 +2352,8 @@
     bookTab.focus();
   }
   bookTab.addEventListener("click", openBookingPanel);
+  var heroBookBtn = document.getElementById("hero-book-btn");
+  if (heroBookBtn) heroBookBtn.addEventListener("click", function(e){ e.preventDefault(); openBookingPanel(); });
   bookClose.addEventListener("click", closeBookingPanel);
   bookOverlay.addEventListener("click", closeBookingPanel);
   document.addEventListener("keydown", function(e){
@@ -2467,9 +2515,13 @@ var ZIP3_STATE="005NY010MA011MA012MA013MA014MA015MA016MA017MA018MA019MA020MA021M
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* VIP hero 3D lighting tunnel — revolving rings + gold dust behind the hero content.
-   Pure decoration: if Three.js fails to load, WebGL is unavailable, or the visitor
-   prefers reduced motion, the hero simply stays in its normal state. */
+/* VIP hero 3D lighting tunnel — INTRO ONLY (owner's direction, 2026-11-24):
+   the vivid rings + gold dust show at full strength for the first ~0.5s, then
+   fade out while the light rotating HTML wash (.hero-wash) takes over; the
+   tunnel is then stopped and its canvas removed, so the rainbow never
+   returns and the page is not running two animations. Pure decoration: if
+   Three.js fails to load, WebGL is unavailable, or the visitor prefers
+   reduced motion, the wash simply carries the hero on its own. */
 (function () {
   try {
     var container = document.getElementById('hero-tunnel');
@@ -2541,8 +2593,11 @@ var ZIP3_STATE="005NY010MA011MA012MA013MA014MA015MA016MA017MA018MA019MA020MA021M
     }
 
     var clock = new THREE.Clock();
+    var rafId = null;
+    var tunnelStopped = false;
     function animate() {
-      requestAnimationFrame(animate);
+      if (tunnelStopped) return;
+      rafId = requestAnimationFrame(animate);
       var elapsedTime = clock.getElapsedTime();
       if (tunnelGroup) {
         tunnelGroup.rotation.z = elapsedTime * 0.12;
@@ -2561,17 +2616,39 @@ var ZIP3_STATE="005NY010MA011MA012MA013MA014MA015MA016MA017MA018MA019MA020MA021M
     initThree();
     animate();
 
-    /* Auto-loop: dark state, tunnel fades in at 3.5s, fades out at 10s, repeats every 14s */
-    function runTimeline() {
-      container.classList.remove('active');
-      setTimeout(function () { container.classList.add('active'); }, 3500);
-      setTimeout(function () { container.classList.remove('active'); }, 10000);
-    }
-    runTimeline();
-    setInterval(runTimeline, 14000);
+    /* Intro timing: full strength for the first ~0.5s, then a ~1.8s fade
+       (the .gone CSS transition) while the light wash slides in beneath.
+       At ~2.6s the loop is stopped, the renderer disposed and the canvas
+       removed — the tunnel never comes back. */
+    setTimeout(function () { container.classList.add('gone'); }, 500);
+    setTimeout(function () {
+      tunnelStopped = true;
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', onWindowResize);
+      try {
+        if (renderer) {
+          renderer.dispose();
+          if (renderer.forceContextLoss) renderer.forceContextLoss();
+        }
+      } catch (e2) { /* Decorative only. */ }
+      if (container.parentNode) container.parentNode.removeChild(container);
+    }, 2600);
   } catch (e) {
     /* Decorative only — never let the animation break the page. */
   }
+})();
+</script>
+<script>
+/* VIP hero wash — at ~0.5s the light rotating wash slides in as the tunnel
+   intro fades (see .hero-wash CSS). Runs independently of Three.js, so the
+   steady state arrives even if the tunnel never loads. Under
+   prefers-reduced-motion the CSS shows the wash statically instead. */
+(function () {
+  var w = document.getElementById('hero-wash');
+  if (!w) return;
+  function arm() { setTimeout(function () { w.classList.add('on'); }, 500); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', arm);
+  else arm();
 })();
 </script>
 <!-- VIP PLANNING CHAT SCRIPT START -->
@@ -4419,7 +4496,13 @@ var ZIP3_STATE="005NY010MA011MA012MA013MA014MA015MA016MA017MA018MA019MA020MA021M
   var freshBtn = el("vipx-fresh-btn");
   if (freshBtn) freshBtn.addEventListener("click", function () {
     clearSession();
+    S = freshState();
+    clearPhoto();
+    threadEl.innerHTML = "";
+    outputEl.className = "vipx-output";
     if (resumeEl) resumeEl.classList.remove("show");
+    syncBuilder();
+    updateMetrics();
     greet();
   });
 
