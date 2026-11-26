@@ -1899,7 +1899,7 @@
             <div class="vipx-bundle-actions">
               <button class="vipx-btn" type="button" id="vipx-copy-all">Copy all items &amp; links</button>
               <a class="vipx-btn ghost" id="vipx-wa" href="#" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">Share on WhatsApp</a>
-              <a class="vipx-btn ghost" id="vipx-sms" href="#" style="text-decoration:none;display:inline-block">Share by text</a>
+              <button class="vipx-btn ghost" type="button" id="vipx-sms" style="display:inline-block">Copy list to share</button>
             </div>
             <p class="vipx-note">Items are purchased directly from the retailer at their standard price — not included in VIP Events service packages.</p>
           </div>
@@ -1968,7 +1968,7 @@
     <div class="vipx-modal" id="vipx-team-modal" role="dialog" aria-modal="true" aria-labelledby="vipx-team-title">
       <div class="vipx-modal-card">
         <h4 id="vipx-team-title">Send This Plan to VIP Events</h4>
-        <p>Your details plus the plan summary below are packaged into a text message to the VIP Events team at <strong>201-649-3696</strong> - it opens in your own messages app, ready to send.</p>
+        <p>Your details plus the plan summary below are attached to your message - one more tap and it is on its way to the VIP Events team, without leaving this page to text.</p>
         <label for="vipx-team-name">Your name</label>
         <input type="text" id="vipx-team-name" autocomplete="name" placeholder="Your name" />
         <label for="vipx-team-phone">Your phone</label>
@@ -1978,7 +1978,7 @@
         <label for="vipx-team-summary">Plan summary (attached)</label>
         <textarea id="vipx-team-summary" readonly></textarea>
         <div class="vipx-modal-actions">
-          <a class="vipx-btn" id="vipx-team-send" href="sms:+12016493696" style="text-decoration:none;display:inline-block">Text it to VIP Events</a>
+          <button class="vipx-btn" type="button" id="vipx-team-send" style="display:inline-block">Message VIP Events</button>
           <button class="vipx-btn ghost" type="button" id="vipx-team-close">Cancel</button>
         </div>
       </div>
@@ -4037,10 +4037,9 @@ var ZIP3_STATE="005NY010MA011MA012MA013MA014MA015MA016MA017MA018MA019MA020MA021M
   }
   function updateShareLinks() {
     if (!S.plan) return;
-    var wa = el("vipx-wa"), sms = el("vipx-sms");
+    var wa = el("vipx-wa");
     var text = bundleText();
     if (wa) wa.href = "https://wa.me/?text=" + encodeURIComponent(text);
-    if (sms) sms.href = "sms:?&body=" + encodeURIComponent(text);
   }
   function buildCard(item, idx) {
     var card = document.createElement("article");
@@ -4330,7 +4329,9 @@ var ZIP3_STATE="005NY010MA011MA012MA013MA014MA015MA016MA017MA018MA019MA020MA021M
     if (who.length) head += " " + who.join(", ") + ".";
     var summaryEl = el("vipx-team-summary");
     var body = head + "\n\n" + (summaryEl ? summaryEl.value : teamSummaryText());
-    send.href = "sms:" + TEAM_NUMBER + "?&body=" + encodeURIComponent(body);
+    send.setAttribute("data-msg-name", name.trim());
+    send.setAttribute("data-msg-phone", phone.trim());
+    send.setAttribute("data-msg-body", body);
   }
   function openTeam() {
     var summaryEl = el("vipx-team-summary");
@@ -4656,6 +4657,8 @@ var ZIP3_STATE="005NY010MA011MA012MA013MA014MA015MA016MA017MA018MA019MA020MA021M
 
   var copyAll = el("vipx-copy-all");
   if (copyAll) copyAll.addEventListener("click", function () { if (S.plan) copyText(bundleText(), "Copied!"); });
+  var smsShare = el("vipx-sms");
+  if (smsShare) smsShare.addEventListener("click", function () { if (S.plan) copyText(bundleText(), "List copied - paste it anywhere to share it!"); });
   var printBtn = el("vipx-print-btn");
   if (printBtn) printBtn.addEventListener("click", function () {
     document.body.classList.add("vipx-printing");
@@ -4700,6 +4703,16 @@ var ZIP3_STATE="005NY010MA011MA012MA013MA014MA015MA016MA017MA018MA019MA020MA021M
   });
   var teamClose = el("vipx-team-close");
   if (teamClose) teamClose.addEventListener("click", function () { closeModal(teamModal); });
+  var teamSend = el("vipx-team-send");
+  if (teamSend) teamSend.addEventListener("click", function () {
+    refreshTeamSend();
+    closeModal(teamModal);
+    if (window.vipMsgOpen) window.vipMsgOpen({
+      name: teamSend.getAttribute("data-msg-name") || "",
+      phone: teamSend.getAttribute("data-msg-phone") || "",
+      message: teamSend.getAttribute("data-msg-body") || ""
+    });
+  });
   if (teamModal) teamModal.addEventListener("click", function (ev) { if (ev.target === teamModal) closeModal(teamModal); });
 
   var startOver = el("vipx-startover");
@@ -5116,5 +5129,110 @@ var ZIP3_STATE="005NY010MA011MA012MA013MA014MA015MA016MA017MA018MA019MA020MA021M
 })();
 </script>
 <!-- VIP EMAIL SHEET END -->
+
+<!-- VIP MESSAGE SHEET START -->
+<style>
+#vipMsgSheet{position:fixed;inset:0;z-index:1200;display:none}
+#vipMsgSheet.on{display:block}
+#vipMsgSheet .vms-back{position:absolute;inset:0;background:rgba(4,6,13,.58);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+#vipMsgSheet .vms-card{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:min(460px,100%);background:rgba(13,23,48,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#f4efe4;border-radius:22px 22px 0 0;border:1px solid rgba(197,160,89,.45);border-bottom:0;padding:24px 22px 28px;box-shadow:0 -18px 50px rgba(0,0,0,.45)}
+@media(min-width:640px){#vipMsgSheet .vms-card{bottom:auto;top:50%;transform:translate(-50%,-50%);border-radius:22px;border-bottom:1px solid rgba(197,160,89,.45)}}
+#vipMsgSheet h3{margin:0 0 4px;font-size:22px;color:#fff}
+#vipMsgSheet .vms-sub{margin:0 0 6px;color:#c9cede;font-size:14.5px}
+#vipMsgSheet label{display:block;font-weight:700;font-size:13.5px;color:#e9dfc2;margin:13px 0 6px}
+#vipMsgSheet .vms-field{width:100%;box-sizing:border-box;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:12px 13px;color:#fff;font:inherit;font-size:15.5px}
+#vipMsgSheet .vms-field::placeholder{color:#8f97b5}
+#vipMsgSheet .vms-field:focus{outline:none;border-color:#e8c97a;box-shadow:0 0 0 3px rgba(197,160,89,.25)}
+#vipMsgSheet .vms-field.bad{border-color:#e0655f;box-shadow:0 0 0 3px rgba(224,101,95,.22)}
+#vipMsgSheet textarea.vms-field{resize:vertical;min-height:92px}
+#vipMsgSheet .vms-note{display:none;margin:12px 0 0;color:#f0b3ae;font-size:14px}
+#vipMsgSheet .vms-note.show{display:block}
+#vipMsgSheet .vms-btn{display:flex;align-items:center;justify-content:center;width:100%;border:0;cursor:pointer;font:inherit;font-weight:800;font-size:15.5px;border-radius:999px;padding:13px 18px;margin-top:16px;text-decoration:none}
+#vipMsgSheet .vms-gold{background:#c5a059;color:#141414}
+#vipMsgSheet .vms-x{position:absolute;top:10px;right:14px;background:none;border:0;color:#c9cede;font-size:26px;cursor:pointer;line-height:1}
+#vipMsgSheet .vms-thanks{margin:6px 0 2px;color:#f4efe4;font-size:16.5px;line-height:1.55}
+</style>
+<div id="vipMsgSheet" role="dialog" aria-modal="true" aria-labelledby="vmsTitle">
+  <div class="vms-back" data-vms-close></div>
+  <div class="vms-card">
+    <button class="vms-x" type="button" data-vms-close aria-label="Close">&times;</button>
+    <div id="vmsFormView">
+      <h3 id="vmsTitle">Message VIP Events</h3>
+      <p class="vms-sub">Send us a message right here - we reply personally.</p>
+      <label for="vmsName">Your name</label>
+      <input class="vms-field" type="text" id="vmsName" autocomplete="name" placeholder="Your full name" />
+      <label for="vmsPhone">Phone number</label>
+      <input class="vms-field" type="tel" id="vmsPhone" autocomplete="tel" placeholder="e.g. (718) 555-0123" />
+      <label for="vmsMessage">Your message</label>
+      <textarea class="vms-field" id="vmsMessage" rows="4" placeholder="Tell us about your event - the date, the room, and the feeling you want&hellip;"></textarea>
+      <p class="vms-note" id="vmsNote" role="alert"></p>
+      <button class="vms-btn vms-gold" type="button" id="vmsSend">Send message</button>
+    </div>
+    <div id="vmsThanksView" hidden>
+      <h3>Message sent</h3>
+      <p class="vms-thanks">Thank you so much for contacting VIP Events! ✨ Your message is in, and you will receive a callback soon from our number, (201) 649-3696. We will get back to you shortly — we look forward to making your event truly special.</p>
+      <button class="vms-btn vms-gold" type="button" data-vms-close>Done</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var sheet=document.getElementById('vipMsgSheet');
+  if(!sheet) return;
+  var formView=document.getElementById('vmsFormView');
+  var thanksView=document.getElementById('vmsThanksView');
+  var nameEl=document.getElementById('vmsName');
+  var phoneEl=document.getElementById('vmsPhone');
+  var msgEl=document.getElementById('vmsMessage');
+  var noteEl=document.getElementById('vmsNote');
+  function showForm(){formView.hidden=false;thanksView.hidden=true;}
+  function open(prefill){
+    showForm();
+    noteEl.classList.remove('show');
+    [nameEl,phoneEl,msgEl].forEach(function(f){f.classList.remove('bad');});
+    if(prefill){
+      if(prefill.name) nameEl.value=prefill.name;
+      if(prefill.phone) phoneEl.value=prefill.phone;
+      if(prefill.message) msgEl.value=prefill.message;
+    }
+    sheet.classList.add('on');
+    nameEl.focus();
+  }
+  function close(){
+    sheet.classList.remove('on');
+    nameEl.value='';phoneEl.value='';msgEl.value='';
+    noteEl.classList.remove('show');
+    [nameEl,phoneEl,msgEl].forEach(function(f){f.classList.remove('bad');});
+    showForm();
+  }
+  window.vipMsgOpen=open;
+  document.querySelectorAll('.js-msg-open').forEach(function(el){
+    el.addEventListener('click',function(e){e.preventDefault();open();});
+  });
+  sheet.querySelectorAll('[data-vms-close]').forEach(function(el){el.addEventListener('click',close);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&sheet.classList.contains('on'))close();});
+  document.getElementById('vmsSend').addEventListener('click',function(){
+    var name=nameEl.value.trim(), phone=phoneEl.value.trim(), message=msgEl.value.trim();
+    var missing=[];
+    [[nameEl,name],[phoneEl,phone],[msgEl,message]].forEach(function(pair){
+      pair[0].classList.toggle('bad',!pair[1]);
+      if(!pair[1]) missing.push(pair[0]);
+    });
+    if(missing.length){
+      noteEl.textContent='Please add your name, phone number, and a short message so we can call you back.';
+      noteEl.classList.add('show');
+      missing[0].focus();
+      return;
+    }
+    noteEl.classList.remove('show');
+    var subject=encodeURIComponent('Website message \u2014 '+name);
+    var body=encodeURIComponent('Name: '+name+'\nPhone: '+phone+'\nMessage: '+message);
+    formView.hidden=true;
+    thanksView.hidden=false;
+    window.location.href='mailto:vipeventsbookings@gmail.com?subject='+subject+'&body='+body;
+  });
+})();
+</script>
+<!-- VIP MESSAGE SHEET END -->
 </body>
 </html>
